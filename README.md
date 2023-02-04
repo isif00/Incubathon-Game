@@ -1,4 +1,4 @@
-# Incubathon-Game
+### Incubathon-Game
 
 #Overview
    a simple 3D isometric shooting game for OMC incubathon.
