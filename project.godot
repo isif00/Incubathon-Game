@@ -44,7 +44,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/godot_editor_discord_presence/Discord RPC/ipc/module/rich presence/RichPreseneModule.gd"
 }, {
-"base": "",
+"base": "StreamPeerGDNative",
 "class": "StreamPeerUnix",
 "language": "NativeScript",
 "path": "res://addons/godot-unix-socket/unix-socket.gdns"
