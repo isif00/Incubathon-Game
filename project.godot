@@ -44,7 +44,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/godot_editor_discord_presence/Discord RPC/ipc/module/rich presence/RichPreseneModule.gd"
 }, {
-"base": "StreamPeerGDNative",
+"base": "",
 "class": "StreamPeerUnix",
 "language": "NativeScript",
 "path": "res://addons/godot-unix-socket/unix-socket.gdns"
@@ -81,13 +81,18 @@ _global_script_class_icons={
 [application]
 
 config/name="Incubathon Game"
-run/main_scene="res://Assets/Scenes/MainMap.tscn"
+run/main_scene="res://Assets/Scenes/Level1.tscn"
 config/icon="res://Godot_env/icon.png"
 
 [discord_presence]
 
 first_button/label="Repository"
 first_button/url="https://github.com/isif00/Incubathon-Game"
+
+[display]
+
+window/stretch/mode="2d"
+window/stretch/aspect="keep"
 
 [editor_plugins]
 
