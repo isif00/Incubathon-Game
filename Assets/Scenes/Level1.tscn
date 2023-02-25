@@ -1,10 +1,10 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Assets/microFantasy.v0.4/tilesets/platformer.png" type="Texture" id=1]
-[ext_resource path="res://Assets/microFantasy.v0.4/characters/barbarian/barbarian_attack_01.png" type="Texture" id=2]
-
-[sub_resource type="ConvexPolygonShape2D" id=4]
-points = PoolVector2Array( 0, 0, 8, 0, 8, 8, 0, 8 )
+[ext_resource path="res://Assets/microFantasy.v0.4/items/key_gold.png" type="Texture" id=2]
+[ext_resource path="res://Assets/microFantasy.v0.4/items/potion_green.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Ninja_Free(FIXED)/Ninja.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Scenes/Player.gd" type="Script" id=5]
 
 [sub_resource type="ConvexPolygonShape2D" id=5]
 points = PoolVector2Array( 0, 0, 8, 0, 8, 8, 0, 8 )
@@ -29,16 +29,9 @@ points = PoolVector2Array( 0, 0, 8, 0, 8, 8, 0, 8 )
 0/navigation_offset = Vector2( 0, 0 )
 0/shape_offset = Vector2( 0, 0 )
 0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-0/shape = SubResource( 4 )
 0/shape_one_way = false
-0/shape_one_way_margin = 1.0
-0/shapes = [ {
-"autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 4 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
-} ]
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
 0/z_index = 0
 1/name = "platformer.png 1"
 1/texture = ExtResource( 1 )
@@ -196,6 +189,20 @@ points = PoolVector2Array( 0, 0, 8, 0, 8, 8, 0, 8 )
 0/shape_one_way_margin = 0.0
 0/shapes = [  ]
 0/z_index = 0
+1/name = "platformer.png 1"
+1/texture = ExtResource( 1 )
+1/tex_offset = Vector2( 0, 0 )
+1/modulate = Color( 1, 1, 1, 1 )
+1/region = Rect2( 33, 31, 7, 9 )
+1/tile_mode = 0
+1/occluder_offset = Vector2( 0, 0 )
+1/navigation_offset = Vector2( 0, 0 )
+1/shape_offset = Vector2( 0, 0 )
+1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+1/shape_one_way = false
+1/shape_one_way_margin = 0.0
+1/shapes = [  ]
+1/z_index = 0
 
 [sub_resource type="ConvexPolygonShape2D" id=9]
 points = PoolVector2Array( 0, 0, 25, 0, 25, 4, 0, 4 )
@@ -264,6 +271,137 @@ points = PoolVector2Array( 0, 0, 25, 0, 25, 4, 0, 4 )
 3/shape_one_way_margin = 0.0
 3/shapes = [  ]
 3/z_index = 0
+4/name = "platformer.png 4"
+4/texture = ExtResource( 1 )
+4/tex_offset = Vector2( 0, 0 )
+4/modulate = Color( 1, 1, 1, 1 )
+4/region = Rect2( 32, 31, 8, 9 )
+4/tile_mode = 0
+4/occluder_offset = Vector2( 0, 0 )
+4/navigation_offset = Vector2( 0, 0 )
+4/shape_offset = Vector2( 0, 0 )
+4/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+4/shape_one_way = false
+4/shape_one_way_margin = 0.0
+4/shapes = [  ]
+4/z_index = 0
+
+[sub_resource type="RectangleShape2D" id=10]
+extents = Vector2( 2.023, 1.68586 )
+
+[sub_resource type="Animation" id=11]
+resource_name = "Idle"
+length = 2.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6, 0.9, 1.2, 1.5, 1.8, 2.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 1, 2, 3, 4, 5, 6, 7, 8 ]
+}
+
+[sub_resource type="Animation" id=12]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 20 ]
+}
+
+[sub_resource type="Animation" id=13]
+resource_name = "Run"
+length = 2.7
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.8, 1.2, 1.6, 2, 2.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 10, 11, 12, 13, 14, 15, 16 ]
+}
+
+[sub_resource type="Animation" id=17]
+resource_name = "death"
+length = 2.5
+step = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.8, 1.2, 1.6, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 73, 74, 76, 75, 77, 78 ]
+}
+
+[sub_resource type="Animation" id=14]
+resource_name = "hit"
+length = 1.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 55, 56, 57 ]
+}
+
+[sub_resource type="Animation" id=15]
+resource_name = "hit2"
+length = 2.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.8, 1.2, 1.6, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 64, 65, 66, 67, 68, 69 ]
+}
+
+[sub_resource type="Animation" id=16]
+resource_name = "jumping"
+length = 3.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 18, 25 ]
+}
 
 [node name="LEVEL1" type="Node2D"]
 
@@ -273,11 +411,6 @@ cell_size = Vector2( 8, 8 )
 format = 1
 tile_data = PoolIntArray( -196615, 1, 0, -196614, 1, 0, -196613, 1, 0, -196612, 1, 0, -196611, 1, 0, -196610, 1, 0, -196609, 1, 0, -262144, 1, 0, -262143, 1, 0, -262142, 1, 0, -262141, 1, 0, -262140, 1, 0, -262139, 1, 0, -262138, 1, 0, -131079, 1, 0, -131078, 0, 0, -131077, 0, 0, -131076, 0, 0, -131075, 0, 0, -131074, 0, 0, -131073, 0, 0, -196608, 0, 0, -196607, 0, 0, -196606, 0, 0, -196605, 0, 0, -196604, 0, 0, -196603, 0, 0, -196602, 1, 0, -65543, 1, 0, -65542, 0, 0, -65541, 0, 0, -65540, 0, 0, -65539, 0, 0, -65538, 0, 0, -65537, 0, 0, -131072, 0, 0, -131071, 0, 0, -131070, 0, 0, -131069, 0, 0, -131068, 0, 0, -131067, 0, 0, -131066, 1, 0, -7, 1, 0, -6, 0, 0, -5, 0, 0, -4, 0, 0, -3, 0, 0, -2, 0, 0, -1, 0, 0, -65536, 0, 0, -65535, 0, 0, -65534, 0, 0, -65533, 0, 0, -65532, 0, 0, -65531, 0, 0, -65530, 1, 0, 65529, 1, 0, 65530, 0, 0, 65531, 0, 0, 65532, 0, 0, 65533, 0, 0, 65534, 0, 0, 65535, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 1, 0, 131065, 1, 0, 131066, 0, 0, 131067, 0, 0, 131068, 0, 0, 131069, 0, 0, 131070, 0, 0, 131071, 0, 0, 65536, 0, 0, 65537, 0, 0, 65538, 0, 0, 65539, 0, 0, 65540, 0, 0, 65541, 0, 0, 65542, 1, 0, 196601, 1, 0, 196602, 0, 0, 196603, 0, 0, 196604, 0, 0, 196605, 0, 0, 196606, 0, 0, 196607, 0, 0, 131072, 0, 0, 131073, 0, 0, 131074, 0, 0, 131075, 0, 0, 131076, 0, 0, 131077, 0, 0, 131078, 1, 0, 262137, 1, 0, 262138, 1, 0, 262139, 1, 0, 262140, 1, 0, 262141, 1, 0, 262142, 1, 0, 262143, 1, 0, 196608, 1, 0, 196609, 1, 0, 196610, 1, 0, 196611, 1, 0, 196612, 1, 0, 196613, 1, 0, 196614, 1, 0 )
 
-[node name="BarbarianAttack01" type="Sprite" parent="TileMap"]
-position = Vector2( -12, 4 )
-scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 2 )
-
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 zoom = Vector2( 0.1, 0.1 )
@@ -285,11 +418,52 @@ zoom = Vector2( 0.1, 0.1 )
 [node name="TileMap2" type="TileMap" parent="."]
 tile_set = SubResource( 2 )
 cell_size = Vector2( 15, 13 )
+cell_custom_transform = Transform2D( 10, 0, 0, 10, 0, 0 )
 format = 1
-tile_data = PoolIntArray( -65535, 0, 0 )
+tile_data = PoolIntArray( -131070, 1, 0, -65535, 0, 0, 1, 1, 0 )
 
 [node name="TileMap3" type="TileMap" parent="."]
 tile_set = SubResource( 3 )
 cell_size = Vector2( 8, 8 )
 format = 1
 tile_data = PoolIntArray( -196614, 1, 0, -65540, 3, 0, -5, 0, 0, -4, 2, 0, 65532, 2, 0, 1, 0, 0, 3, 2, 0, 131068, 0, 0, 131070, 2, 0, 65539, 2, 0, 196606, 2, 0, 131075, 2, 0, 196612, 1, 0 )
+
+[node name="KeyGold" type="Sprite" parent="."]
+position = Vector2( -22, -10 )
+scale = Vector2( 0.464286, 0.333333 )
+texture = ExtResource( 2 )
+
+[node name="PotionGreen" type="Sprite" parent="."]
+position = Vector2( 11, 22 )
+scale = Vector2( 0.642857, 0.5 )
+texture = ExtResource( 3 )
+
+[node name="Player" type="KinematicBody2D" parent="."]
+scale = Vector2( 1.8, 1.8 )
+script = ExtResource( 5 )
+jump_speed = -35
+gravity = 70
+
+[node name="Sprite" type="Sprite" parent="Player"]
+position = Vector2( -4.8514, -5.20043 )
+rotation = -0.00174533
+scale = Vector2( 0.180483, 0.141 )
+texture = ExtResource( 4 )
+hframes = 9
+vframes = 9
+frame = 20
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+position = Vector2( -4.72134, -3.83457 )
+scale = Vector2( 1, 1 )
+shape = SubResource( 10 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
+playback_speed = 3.0
+anims/Idle = SubResource( 11 )
+anims/RESET = SubResource( 12 )
+anims/Run = SubResource( 13 )
+anims/death = SubResource( 17 )
+anims/hit = SubResource( 14 )
+anims/hit2 = SubResource( 15 )
+anims/jumping = SubResource( 16 )

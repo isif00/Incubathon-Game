@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Assets/microFantasy.v0.4/tilesets/platformer.png" type="Texture" id=1]
 
@@ -431,6 +431,22 @@ points = PoolVector2Array( 0, 0, 7, 0, 7, 3, 0, 3 )
 6/shapes = [  ]
 6/z_index = 0
 
+[sub_resource type="TileSet" id=17]
+0/name = "platformer.png 0"
+0/texture = ExtResource( 1 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 32, 31, 8, 9 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
+
 [node name="Node2D" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -454,3 +470,9 @@ tile_set = SubResource( 3 )
 cell_size = Vector2( 7, 8 )
 format = 1
 tile_data = PoolIntArray( -131070, 4, 0, -131069, 4, 0, -6, 3, 0, -5, 2, 0, -4, 6, 0, -65536, 4, 0, -65535, 4, 0, 65531, 2, 0, 65534, 4, 0, 65535, 4, 0, 4, 4, 0, 5, 4, 0, 6, 4, 0, 131067, 2, 0, 196603, 2, 0, 262142, 3, 0, 262143, 1, 0 )
+
+[node name="TileMap4" type="TileMap" parent="."]
+tile_set = SubResource( 17 )
+cell_size = Vector2( 8, 8 )
+format = 1
+tile_data = PoolIntArray( -131070, 0, 0, -65536, 0, 0, 65534, 0, 0, 4, 0, 0 )
