@@ -1,51 +1,135 @@
 extends KinematicBody2D
 
+
+#export ---> we can change the value from the inspector 
 export (int) var run_speed = 20
 export (int) var jump_speed = -400
 export (int) var gravity = 1200
+export var climbing = false
 
-var velocity = Vector2()
+
+const ACCELERATION = 100
+const FRICTION = 200
+var velocity = Vector2.ZERO
+
 var jumping = false
+var runing = false 
+var idle = true 
+
+var state_machine
+
+var input_vector = Vector2.ZERO
+
+func _ready():
+	 state_machine = $AnimationTree.get("parameters/playback") ## get access to animation tree
+
+
+
 
 var facing_right = true
 
 func get_input():
-	velocity.x = 0
-	var right = Input.is_action_pressed("move_right")
-	var left = Input.is_action_pressed("move_left")
-	var jump = Input.is_action_just_pressed("jump")
-
-	if jump:
-		jumping = true
-		$AnimationPlayer.play("jumping")
-		print("jump")
-		velocity.y = jump_speed
+	
+	input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")  # set the speed diection	
+	var jump_pressed = Input.is_action_just_pressed("ui_up")
+	
 		
-	elif right:
+	if input_vector.x > 0 :
 		facing_right = true
-		velocity.x += run_speed
-		$AnimationPlayer.play("Run")
-	elif left:
+	elif input_vector.x < 0 :
 		facing_right = false
-		velocity.x -= run_speed
-		$AnimationPlayer.play("Run")
-	else:
-		$AnimationPlayer.play("Idle")
-		velocity.x = lerp(velocity.x, 0, 0.2)
+	
+	
+	if jump_pressed and is_on_floor():
+		velocity.y = jump_speed 
+		jumping= true
+
+
+func _on_ladder_body_entered(body): # body ==> kinematicBody2D + tileMap
+	if body.is_in_group("Climber"): # only target the player ( who is in climber group )
+		print("IN")
 		
+		
+		if not body.climbing :
+			body.climbing = true
+
+		
+func _on_ladder_body_exited(body):
+	if body.is_in_group("Climber"):
+		 
+		print("OUT ")
+		if body.climbing :
+			body.climbing = false
+
+	
+var on_ladder = false
 
 func _physics_process(delta):
 	
 	if facing_right == true:
 		$Sprite.scale.x = 0.194
+	
 	else:
 		$Sprite.scale.x = -0.194
-
-	velocity.x = clamp(velocity.x, -run_speed, run_speed)
 	
+		
 	get_input()
-	velocity.y += gravity * delta
+	
+	if climbing:
+		
+		on_ladder = true
+		print ("IN")
+		velocity.y = 0
+		gravity = 0
+		input_vector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
+		velocity.y += input_vector.y * 20 
+		
+	elif not climbing :
+		state_machine.travel("jumping")
+		print("OUT")
+		#velocity.y += gravity * delta
+		gravity = 70
+	
+	if on_ladder and not climbing :
+		velocity.y += -10 *delta
+		on_ladder = false
+		
+		
+	velocity.y += gravity * delta	
+	print(velocity.y)
+	print(gravity)
+		
 	
 	if jumping:
-		jumping = false
+#		state_machine.set("parameters/Idle/active", false )
+#		state_machine.set("parameters/Run/active", false )	
+#		state_machine.set("parameters/jummping/active", true )	
+		
+		if not climbing :
+			state_machine.travel("jumping") 
+		jumping = false 
+	
+	else:
+		if(input_vector.x != 0 ) and is_on_floor() :
+			velocity.x += input_vector.x * ACCELERATION	* delta
+			velocity.x = clamp(velocity.x, -run_speed, run_speed)
+#			runing = true	
+			state_machine.travel("Run")
+			
+		elif input_vector.x == 0:
+#			idle = true
+			state_machine.travel("Idle")
+			#velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
+			velocity.x = lerp(velocity.x, 0, 1.2)
+		else:
+			if facing_right:
+				velocity.x = 20
+			else:
+				velocity.x = -20
+						
 	velocity = move_and_slide(velocity, Vector2(0, -1))
+
+
+	#var current_aniamtion = state_machine.get_current_node() 
+	## get the current animation state ( from the animationTree ) 
+	#print("current animation is : ", current_aniamtion)
