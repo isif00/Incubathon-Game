@@ -41,7 +41,7 @@ func get_input():
 	
 	
 	if jump_pressed and is_on_floor():
-		velocity.y = jump_speed 
+		velocity.y = jump_speed *2 # multiplied by 2 just to be able to jump higher
 		jumping= true
 
 
