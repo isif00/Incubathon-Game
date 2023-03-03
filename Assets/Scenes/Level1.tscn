@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://Assets/microFantasy.v0.4/tilesets/platformer.png" type="Texture" id=1]
 [ext_resource path="res://Assets/microFantasy.v0.4/items/key_gold.png" type="Texture" id=2]
@@ -358,7 +358,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=14]
 resource_name = "hit"
-length = 1.2
+length = 0.6
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -366,7 +366,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.4, 0.8 ),
+"times": PoolRealArray( 0, 0.2, 0.4 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ 55, 56, 57 ]
@@ -410,6 +410,9 @@ animation = "Idle"
 [sub_resource type="AnimationNodeAnimation" id=19]
 animation = "Run"
 
+[sub_resource type="AnimationNodeAnimation" id=34]
+animation = "hit"
+
 [sub_resource type="AnimationNodeAnimation" id=20]
 animation = "jumping"
 
@@ -427,17 +430,29 @@ switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=26]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=35]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=36]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=37]
+
 [sub_resource type="AnimationNodeStateMachine" id=27]
 states/Idle/node = SubResource( 18 )
-states/Idle/position = Vector2( 291, 56 )
+states/Idle/position = Vector2( 184, 22 )
 states/Run/node = SubResource( 19 )
-states/Run/position = Vector2( 550, 64 )
+states/Run/position = Vector2( 694, 59 )
+states/hit/node = SubResource( 34 )
+states/hit/position = Vector2( 144, 213 )
 states/jumping/node = SubResource( 20 )
 states/jumping/position = Vector2( 461, 208 )
-transitions = [ "Idle", "Run", SubResource( 21 ), "Run", "Idle", SubResource( 22 ), "Idle", "jumping", SubResource( 23 ), "jumping", "Idle", SubResource( 24 ), "jumping", "Run", SubResource( 25 ), "Run", "jumping", SubResource( 26 ) ]
+transitions = [ "Idle", "Run", SubResource( 21 ), "Run", "Idle", SubResource( 22 ), "Idle", "jumping", SubResource( 23 ), "jumping", "Idle", SubResource( 24 ), "jumping", "Run", SubResource( 25 ), "Run", "jumping", SubResource( 26 ), "Idle", "hit", SubResource( 35 ), "hit", "Idle", SubResource( 36 ), "Run", "hit", SubResource( 37 ) ]
 start_node = "Idle"
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=28]
+
+[sub_resource type="RectangleShape2D" id=38]
+extents = Vector2( 1.66667, 1.11111 )
 
 [sub_resource type="RectangleShape2D" id=30]
 extents = Vector2( 3, 7.40625 )
@@ -498,11 +513,11 @@ vframes = 9
 frame = 20
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+visible = false
 position = Vector2( -5, -3.88889 )
 shape = SubResource( 10 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
-playback_speed = 3.0
 anims/Idle = SubResource( 11 )
 anims/RESET = SubResource( 12 )
 anims/Run = SubResource( 13 )
@@ -516,6 +531,14 @@ tree_root = SubResource( 27 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/playback = SubResource( 28 )
+
+[node name="Timer" type="Timer" parent="Player"]
+
+[node name="mele" type="Area2D" parent="Player"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/mele"]
+position = Vector2( -1.11111, -3.88889 )
+shape = SubResource( 38 )
 
 [node name="lader" type="Area2D" parent="."]
 
@@ -543,5 +566,6 @@ position = Vector2( -22, -10 )
 scale = Vector2( 0.464286, 0.333333 )
 texture = ExtResource( 2 )
 
+[connection signal="timeout" from="Player/Timer" to="Player" method="resume_movement"]
 [connection signal="body_entered" from="lader" to="Player" method="_on_ladder_body_entered"]
 [connection signal="body_exited" from="lader" to="Player" method="_on_ladder_body_exited"]

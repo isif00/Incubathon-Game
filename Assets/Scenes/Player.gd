@@ -15,14 +15,16 @@ var velocity = Vector2.ZERO
 var jumping = false
 var runing = false 
 var idle = true 
+var attack = false 
 
 var state_machine
+var run_animation
 
 var input_vector = Vector2.ZERO
 
 func _ready():
-	 state_machine = $AnimationTree.get("parameters/playback") ## get access to animation tree
-
+	state_machine = $AnimationTree.get("parameters/playback") ## get access to animation tree
+	#run_animation = $AnimationPlayer.get_node("res://Assets/Scenes/Level1.tscn::19")
 
 
 
@@ -32,6 +34,8 @@ func get_input():
 	
 	input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")  # set the speed diection	
 	var jump_pressed = Input.is_action_just_pressed("ui_up")
+	
+	attack = Input.is_action_just_pressed("shoot")
 	
 		
 	if input_vector.x > 0 :
@@ -64,21 +68,52 @@ func _on_ladder_body_exited(body):
 	
 var on_ladder = false
 
+var can_move = true
+
+########################################################## TIMER BONUS ###"
+func resume_movement(): ## runs when the timer went off
+	#can_move = true 
+	print("1 seconds passed")
+#$Timer.start() --> in _pyhisics_process
+
+####################################################################
+
+	
 func _physics_process(delta):
+		
+
 	
 	if facing_right == true:
 		$Sprite.scale.x = 0.194
-	
 	else:
 		$Sprite.scale.x = -0.194
 	
 		
 	get_input()
+					
 	
+	var current_aniamtion = state_machine.get_current_node() 
+		## get the current animation state ( from the animationTree ) 
+#	print("current animation is : ", current_aniamtion)
+	
+#	print("idle = " , idle )
+#	print("Run = " , runing)
+	
+#	if attack:
+##		idle = false 
+##		runing = false
+#		print("current animation is : ", current_aniamtion)
+#		state_machine.travel("hit")
+#
+##		print("attack ! ")
+##		attack = false
+
+		
+
 	if climbing:
 		
 		on_ladder = true
-		print ("IN")
+#		print ("IN")
 		velocity.y = 0
 		gravity = 0
 		input_vector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
@@ -86,7 +121,7 @@ func _physics_process(delta):
 		
 	elif not climbing :
 		state_machine.travel("jumping")
-		print("OUT")
+#		print("OUT")
 		#velocity.y += gravity * delta
 		gravity = 70
 	
@@ -96,9 +131,10 @@ func _physics_process(delta):
 		
 		
 	velocity.y += gravity * delta	
-	print(velocity.y)
-	print(gravity)
-		
+#	print(velocity.y)
+#	print(gravity)
+	
+	
 	
 	if jumping:
 #		state_machine.set("parameters/Idle/active", false )
@@ -113,12 +149,26 @@ func _physics_process(delta):
 		if(input_vector.x != 0 ) and is_on_floor() :
 			velocity.x += input_vector.x * ACCELERATION	* delta
 			velocity.x = clamp(velocity.x, -run_speed, run_speed)
-#			runing = true	
-			state_machine.travel("Run")
+	
+			runing = true
 			
-		elif input_vector.x == 0:
-#			idle = true
-			state_machine.travel("Idle")
+			if runing and not attack :
+				state_machine.travel("Run")
+			elif attack:
+				print("attacking !")
+				state_machine.travel("hit")
+				velocity.x *= -0.5
+				
+				
+				
+		elif input_vector.x == 0  :
+	
+			idle = true
+			if idle :
+				state_machine.travel("Idle")
+				if attack:
+					state_machine.travel("hit")
+			
 			#velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 			velocity.x = lerp(velocity.x, 0, 1.2)
 		else:
@@ -130,6 +180,9 @@ func _physics_process(delta):
 	velocity = move_and_slide(velocity, Vector2(0, -1))
 
 
-	#var current_aniamtion = state_machine.get_current_node() 
-	## get the current animation state ( from the animationTree ) 
-	#print("current animation is : ", current_aniamtion)
+#func idle (idle):
+	
+	#state_machine.travel("Idle")
+
+
+
