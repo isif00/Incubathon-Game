@@ -65,6 +65,12 @@ func _on_ladder_body_exited(body):
 		if body.climbing :
 			body.climbing = false
 
+
+func _on_HitBox_area_entered(area):
+	if area.is_in_group("Sword_Hit"):
+		print("hit !")
+		queue_free()
+
 	
 var on_ladder = false
 
@@ -183,6 +189,11 @@ func _physics_process(delta):
 #func idle (idle):
 	
 	#state_machine.travel("Idle")
+
+
+
+
+
 
 
 
