@@ -69,20 +69,13 @@ func _on_ladder_body_exited(body):
 func _on_HitBox_area_entered(area):
 	if area.is_in_group("Sword_Hit"):
 		print("hit !")
-		queue_free()
+		
 
 	
 var on_ladder = false
 
 var can_move = true
 
-########################################################## TIMER BONUS ###"
-func resume_movement(): ## runs when the timer went off
-	#can_move = true 
-	print("1 seconds passed")
-#$Timer.start() --> in _pyhisics_process
-
-####################################################################
 
 	
 func _physics_process(delta):
@@ -101,20 +94,7 @@ func _physics_process(delta):
 	var current_aniamtion = state_machine.get_current_node() 
 		## get the current animation state ( from the animationTree ) 
 #	print("current animation is : ", current_aniamtion)
-	
-#	print("idle = " , idle )
-#	print("Run = " , runing)
-	
-#	if attack:
-##		idle = false 
-##		runing = false
-#		print("current animation is : ", current_aniamtion)
-#		state_machine.travel("hit")
-#
-##		print("attack ! ")
-##		attack = false
-
-		
+			
 
 	if climbing:
 		
@@ -137,15 +117,11 @@ func _physics_process(delta):
 		
 		
 	velocity.y += gravity * delta	
-#	print(velocity.y)
-#	print(gravity)
 	
 	
 	
 	if jumping:
 #		state_machine.set("parameters/Idle/active", false )
-#		state_machine.set("parameters/Run/active", false )	
-#		state_machine.set("parameters/jummping/active", true )	
 		
 		if not climbing :
 			state_machine.travel("jumping") 
@@ -184,16 +160,3 @@ func _physics_process(delta):
 				velocity.x = -20
 						
 	velocity = move_and_slide(velocity, Vector2(0, -1))
-
-
-#func idle (idle):
-	
-	#state_machine.travel("Idle")
-
-
-
-
-
-
-
-

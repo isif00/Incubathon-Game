@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://Assets/microFantasy.v0.4/tilesets/platformer.png" type="Texture" id=1]
 [ext_resource path="res://Assets/microFantasy.v0.4/items/key_gold.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Assets/Ninja_Free(FIXED)/Ninja.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Scenes/Player.gd" type="Script" id=5]
 [ext_resource path="res://Assets/Scenes/key.gd" type="Script" id=6]
+[ext_resource path="res://Assets/Scenes/Enemy.gd" type="Script" id=7]
 
 [sub_resource type="ConvexPolygonShape2D" id=5]
 points = PoolVector2Array( 0, 0, 8, 0, 8, 8, 0, 8 )
@@ -391,7 +392,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4, 0.5 ),
+"times": PoolRealArray( 0, 0.2, 0.3, 0.4 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 54, 55, 55, 57 ]
@@ -403,7 +404,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4, 0.5 ),
+"times": PoolRealArray( 0, 0.2, 0.3, 0.4 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ true, false, false, true ]
@@ -492,6 +493,12 @@ start_node = "Idle"
 [sub_resource type="RectangleShape2D" id=38]
 extents = Vector2( 1.94444, 0.694444 )
 
+[sub_resource type="RectangleShape2D" id=39]
+extents = Vector2( 2, 2 )
+
+[sub_resource type="RectangleShape2D" id=40]
+extents = Vector2( 1.5, 1.5 )
+
 [sub_resource type="RectangleShape2D" id=30]
 extents = Vector2( 3, 7.40625 )
 
@@ -503,12 +510,6 @@ extents = Vector2( 3, 7.5 )
 
 [sub_resource type="RectangleShape2D" id=33]
 extents = Vector2( 1.25, 2 )
-
-[sub_resource type="RectangleShape2D" id=39]
-extents = Vector2( 2, 2 )
-
-[sub_resource type="RectangleShape2D" id=40]
-extents = Vector2( 1.5, 1.5 )
 
 [node name="LEVEL1" type="Node2D"]
 
@@ -551,7 +552,6 @@ vframes = 9
 frame = 20
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-visible = false
 position = Vector2( -5, -3.88889 )
 shape = SubResource( 10 )
 
@@ -570,14 +570,34 @@ anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/playback = SubResource( 28 )
 
-[node name="Timer" type="Timer" parent="Player"]
-
 [node name="SwordHit" type="Area2D" parent="Player" groups=["Sword_Hit"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player/SwordHit"]
 position = Vector2( -1.94444, -3.19444 )
 shape = SubResource( 38 )
 disabled = true
+
+[node name="Enemy" type="KinematicBody2D" parent="."]
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy"]
+position = Vector2( 11, 22 )
+shape = SubResource( 39 )
+
+[node name="PotionGreen" type="Sprite" parent="Enemy"]
+position = Vector2( 11, 22 )
+scale = Vector2( 0.642857, 0.5 )
+texture = ExtResource( 3 )
+
+[node name="HitBox" type="Area2D" parent="Enemy" groups=["HitBox"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy/HitBox"]
+modulate = Color( 0.207843, 0.596078, 0.0509804, 1 )
+position = Vector2( 11, 22 )
+shape = SubResource( 40 )
 
 [node name="lader" type="Area2D" parent="."]
 
@@ -605,25 +625,7 @@ position = Vector2( -22, -10 )
 scale = Vector2( 0.464286, 0.333333 )
 texture = ExtResource( 2 )
 
-[node name="Enemy" type="KinematicBody2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy"]
-position = Vector2( 11, 22 )
-shape = SubResource( 39 )
-
-[node name="PotionGreen" type="Sprite" parent="Enemy"]
-position = Vector2( 11, 22 )
-scale = Vector2( 0.642857, 0.5 )
-texture = ExtResource( 3 )
-
-[node name="HitBox" type="Area2D" parent="Enemy"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy/HitBox"]
-modulate = Color( 0.207843, 0.596078, 0.0509804, 1 )
-position = Vector2( 11, 22 )
-shape = SubResource( 40 )
-
-[connection signal="timeout" from="Player/Timer" to="Player" method="resume_movement"]
+[connection signal="area_entered" from="Player/SwordHit" to="Enemy" method="_on_SwordHit_area_entered"]
+[connection signal="area_entered" from="Enemy/HitBox" to="Player" method="_on_HitBox_area_entered"]
 [connection signal="body_entered" from="lader" to="Player" method="_on_ladder_body_entered"]
 [connection signal="body_exited" from="lader" to="Player" method="_on_ladder_body_exited"]
-[connection signal="area_entered" from="Enemy/HitBox" to="Player" method="_on_HitBox_area_entered"]
