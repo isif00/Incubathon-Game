@@ -221,11 +221,11 @@ points = PoolVector2Array( 0, 0, 25, 0, 25, 4, 0, 4 )
 0/shape_offset = Vector2( 0, 0 )
 0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 0/shape = SubResource( 9 )
-0/shape_one_way = false
+0/shape_one_way = true
 0/shape_one_way_margin = 1.0
 0/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
+"one_way": true,
 "one_way_margin": 1.0,
 "shape": SubResource( 9 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
@@ -293,7 +293,7 @@ extents = Vector2( 1.66667, 1.92688 )
 
 [sub_resource type="Animation" id=11]
 resource_name = "Idle"
-length = 2.5
+length = 0.55
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -302,7 +302,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3, 0.6, 0.9, 1.2, 1.5, 1.8, 2.1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 1.7, 2 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 1, 2, 3, 4, 5, 6, 7, 8 ]
@@ -349,7 +349,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id=13]
 resource_name = "Run"
-length = 1.4
+length = 0.55
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -358,10 +358,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 10, 11, 12, 13, 14, 15, 16 ]
+"values": [ 10, 11, 12, 13, 15, 16 ]
 }
 
 [sub_resource type="Animation" id=17]
@@ -383,7 +383,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=14]
 resource_name = "hit"
-length = 0.6
+length = 0.35
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -392,7 +392,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 0.3, 0.4 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 54, 55, 55, 57 ]
@@ -404,7 +404,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.2, 0.3, 0.4 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ true, false, false, true ]
@@ -500,7 +500,7 @@ extents = Vector2( 2, 2 )
 extents = Vector2( 1.5, 1.5 )
 
 [sub_resource type="RectangleShape2D" id=30]
-extents = Vector2( 3, 7.40625 )
+extents = Vector2( 3, 8.5 )
 
 [sub_resource type="RectangleShape2D" id=31]
 extents = Vector2( 3, 10.5 )
@@ -602,7 +602,7 @@ shape = SubResource( 40 )
 [node name="lader" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="lader"]
-position = Vector2( -28, 2.59375 )
+position = Vector2( -28, 1.5 )
 shape = SubResource( 30 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="lader"]

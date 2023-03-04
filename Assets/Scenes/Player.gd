@@ -32,8 +32,8 @@ var facing_right = true
 
 func get_input():
 	
-	input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")  # set the speed diection	
-	var jump_pressed = Input.is_action_just_pressed("ui_up")
+	input_vector.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")  # set the speed diection	
+	var jump_pressed = Input.is_action_just_pressed("jump")
 	
 	attack = Input.is_action_just_pressed("shoot")
 	
@@ -102,7 +102,7 @@ func _physics_process(delta):
 #		print ("IN")
 		velocity.y = 0
 		gravity = 0
-		input_vector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
+		input_vector.y = Input.get_action_strength("move_backward") - Input.get_action_strength("move_forward")
 		velocity.y += input_vector.y * 20 
 		
 	elif not climbing :
