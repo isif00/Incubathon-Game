@@ -1,0 +1,5 @@
+### Adding enemy automatic movement
+---
+### 3- Question for you Siffo :
+1 - lmochkil lawlani li 7alito déja ta3 l jumping ki yakhbat raso m3a les platform hadok , esq sta3mlt Layers and Masks ta3 Collisions ?\ 
+2 - check out Bugs to fix 
