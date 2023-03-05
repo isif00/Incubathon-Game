@@ -12,22 +12,30 @@ const ACCELERATION = 100
 const FRICTION = 200
 var velocity = Vector2.ZERO
 
+var health = 3
+var score = 0 
+
 var jumping = false
 var runing = false 
 var idle = true 
 var attack = false 
+var death = false 
+var get_hit = false 
 
 var state_machine
 var run_animation
 
 var input_vector = Vector2.ZERO
 
+
+
 func _ready():
 	state_machine = $AnimationTree.get("parameters/playback") ## get access to animation tree
 	#run_animation = $AnimationPlayer.get_node("res://Assets/Scenes/Level1.tscn::19")
-
-
-
+	$hurt.visible = false 
+	
+	
+		
 var facing_right = true
 
 func get_input():
@@ -48,16 +56,13 @@ func get_input():
 		velocity.y = jump_speed *2 # multiplied by 2 just to be able to jump higher
 		jumping= true
 
-
 func _on_ladder_body_entered(body): # body ==> kinematicBody2D + tileMap
 	if body.is_in_group("Climber"): # only target the player ( who is in climber group )
-		print("IN")
-		
+				
 		
 		if not body.climbing :
 			body.climbing = true
-
-		
+	
 func _on_ladder_body_exited(body):
 	if body.is_in_group("Climber"):
 		 
@@ -65,11 +70,26 @@ func _on_ladder_body_exited(body):
 		if body.climbing :
 			body.climbing = false
 
+func _on_Timer_timeout():
+	$Sprite.visible = true  
+	$hurt.visible =  false
 
 func _on_HitBox_area_entered(area):
 	if area.is_in_group("Sword_Hit"):
-		print("hit !")
+		print("Player hit enemey !")
+		score += 1
+	if area.is_in_group("HitBox_PLayer"):
 		
+		health -= 1		
+		$Sprite.visible = false 
+		$hurt.visible = true 
+		$Timer.start()
+		
+		print(health)
+		print(" DEMAGE ME !! ")
+		if health <= 0:
+			print("DEAD !")
+			death = true			
 
 	
 var on_ladder = false
@@ -81,6 +101,10 @@ var can_move = true
 func _physics_process(delta):
 		
 
+
+
+	if score == 1 :
+		print("winner")
 	
 	if facing_right == true:
 		$Sprite.scale.x = 0.194
@@ -93,9 +117,10 @@ func _physics_process(delta):
 	get_input()
 					
 	
+	
 	var current_aniamtion = state_machine.get_current_node() 
-		## get the current animation state ( from the animationTree ) 
-#	print("current animation is : ", current_aniamtion)
+		##get the current animation state ( from the animationTree ) 
+	#print("current animation is : ", current_aniamtion)
 			
 
 	if climbing:
@@ -124,9 +149,18 @@ func _physics_process(delta):
 	
 	if jumping:
 #		state_machine.set("parameters/Idle/active", false )
+		print(jumping)
+		
+
 		
 		if not climbing :
+			if attack :
+				state_machine.travel("hit")
+				
+			
 			state_machine.travel("jumping") 
+			
+				
 		jumping = false 
 	
 	else:
@@ -142,7 +176,8 @@ func _physics_process(delta):
 				print("attacking !")
 				state_machine.travel("hit")
 				velocity.x *= -0.5
-				
+			elif death: 
+				state_machine.travel("death")
 				
 		elif input_vector.x == 0  :
 	
@@ -151,7 +186,9 @@ func _physics_process(delta):
 				state_machine.travel("Idle")
 				if attack:
 					state_machine.travel("hit")
-			
+				if death:
+					state_machine.travel("death")	
+				
 			#velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 			velocity.x = lerp(velocity.x, 0, 1.2)
 		else:
@@ -161,3 +198,5 @@ func _physics_process(delta):
 				velocity.x = -20
 						
 	velocity = move_and_slide(velocity, Vector2(0, -1))
+
+

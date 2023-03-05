@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=55 format=2]
 
 [ext_resource path="res://Assets/microFantasy.v0.4/tilesets/platformer.png" type="Texture" id=1]
 [ext_resource path="res://Assets/microFantasy.v0.4/items/key_gold.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Assets/Scenes/Player.gd" type="Script" id=5]
 [ext_resource path="res://Assets/Scenes/key.gd" type="Script" id=6]
 [ext_resource path="res://Assets/Scenes/Enemy.gd" type="Script" id=7]
+[ext_resource path="res://Assets/Ninja_hurt.png" type="Texture" id=8]
 
 [sub_resource type="ConvexPolygonShape2D" id=5]
 points = PoolVector2Array( 0, 0, 8, 0, 8, 8, 0, 8 )
@@ -366,7 +367,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=17]
 resource_name = "death"
-length = 2.5
+length = 1.1
 step = 0.001
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -375,7 +376,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.4, 0.8, 1.2, 1.6, 2 ),
+"times": PoolRealArray( 0, 0.174, 0.395, 0.586, 0.802, 1.003 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 73, 74, 76, 75, 77, 78 ]
@@ -449,6 +450,9 @@ animation = "Idle"
 [sub_resource type="AnimationNodeAnimation" id=19]
 animation = "Run"
 
+[sub_resource type="AnimationNodeAnimation" id=42]
+animation = "death"
+
 [sub_resource type="AnimationNodeAnimation" id=34]
 animation = "hit"
 
@@ -476,22 +480,40 @@ switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=37]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=43]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=44]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=45]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=46]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=47]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=48]
+switch_mode = 2
+
 [sub_resource type="AnimationNodeStateMachine" id=27]
 states/Idle/node = SubResource( 18 )
 states/Idle/position = Vector2( 184, 22 )
 states/Run/node = SubResource( 19 )
 states/Run/position = Vector2( 694, 59 )
+states/death/node = SubResource( 42 )
+states/death/position = Vector2( 452, 364 )
 states/hit/node = SubResource( 34 )
 states/hit/position = Vector2( 144, 213 )
 states/jumping/node = SubResource( 20 )
-states/jumping/position = Vector2( 461, 208 )
-transitions = [ "Idle", "Run", SubResource( 21 ), "Run", "Idle", SubResource( 22 ), "Idle", "jumping", SubResource( 23 ), "jumping", "Idle", SubResource( 24 ), "jumping", "Run", SubResource( 25 ), "Run", "jumping", SubResource( 26 ), "Idle", "hit", SubResource( 35 ), "hit", "Idle", SubResource( 36 ), "Run", "hit", SubResource( 37 ) ]
+states/jumping/position = Vector2( 840, 275 )
+transitions = [ "Idle", "Run", SubResource( 21 ), "Run", "Idle", SubResource( 22 ), "Idle", "jumping", SubResource( 23 ), "jumping", "Idle", SubResource( 24 ), "jumping", "Run", SubResource( 25 ), "Run", "jumping", SubResource( 26 ), "Idle", "hit", SubResource( 35 ), "hit", "Idle", SubResource( 36 ), "Run", "hit", SubResource( 37 ), "hit", "death", SubResource( 43 ), "Idle", "death", SubResource( 44 ), "jumping", "death", SubResource( 45 ), "Run", "death", SubResource( 46 ), "jumping", "hit", SubResource( 47 ), "hit", "jumping", SubResource( 48 ) ]
 start_node = "Idle"
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=28]
 
 [sub_resource type="RectangleShape2D" id=38]
 extents = Vector2( 1.94444, 0.694444 )
+
+[sub_resource type="RectangleShape2D" id=41]
+extents = Vector2( 1.66667, 2.22222 )
 
 [sub_resource type="RectangleShape2D" id=39]
 extents = Vector2( 0.75, 1 )
@@ -500,7 +522,7 @@ extents = Vector2( 0.75, 1 )
 extents = Vector2( 1.25, 1.25 )
 
 [sub_resource type="RectangleShape2D" id=30]
-extents = Vector2( 0.25, 8.5 )
+extents = Vector2( 0.25, 8.75 )
 
 [sub_resource type="RectangleShape2D" id=31]
 extents = Vector2( 0.125, 11.25 )
@@ -534,13 +556,19 @@ tile_data = PoolIntArray( -131070, 1, 0, -65535, 0, 0, 1, 1, 0 )
 tile_set = SubResource( 3 )
 cell_size = Vector2( 8, 8 )
 format = 1
-tile_data = PoolIntArray( -196614, 1, 0, -65540, 3, 0, -5, 0, 0, -4, 2, 0, 65532, 2, 0, 1, 0, 0, 3, 2, 0, 131068, 0, 0, 131070, 2, 0, 65539, 2, 0, 196606, 2, 0, 131075, 2, 0, 196612, 1, 0 )
+tile_data = PoolIntArray( -196614, 1, 0, -65541, 3, 0, -5, 0, 0, -4, 2, 0, 65532, 2, 0, 1, 0, 0, 3, 2, 0, 131068, 0, 0, 131070, 2, 0, 65539, 2, 0, 196606, 2, 0, 131075, 2, 0, 196612, 1, 0 )
 
 [node name="Player" type="KinematicBody2D" parent="." groups=["Climber"]]
 scale = Vector2( 1.8, 1.8 )
 script = ExtResource( 5 )
 jump_speed = -35
 gravity = 70
+
+[node name="hurt" type="Sprite" parent="Player"]
+position = Vector2( -4.44444, -3.33333 )
+scale = Vector2( 0.18, 0.141 )
+z_index = 1
+texture = ExtResource( 8 )
 
 [node name="Sprite" type="Sprite" parent="Player"]
 position = Vector2( -4.8514, -5.20043 )
@@ -577,8 +605,19 @@ position = Vector2( -1.944, -3.194 )
 shape = SubResource( 38 )
 disabled = true
 
+[node name="HitBox_Player" type="Area2D" parent="Player" groups=["HitBox_PLayer"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/HitBox_Player"]
+modulate = Color( 0.839216, 0, 0.768627, 1 )
+position = Vector2( -5, -3.88889 )
+shape = SubResource( 41 )
+
+[node name="Timer" type="Timer" parent="Player"]
+wait_time = 0.2
+
 [node name="Enemy" type="KinematicBody2D" parent="." groups=["Enemy"]]
-position = Vector2( 23, 0 )
+position = Vector2( -39, -14 )
+z_index = 1
 script = ExtResource( 7 )
 __meta__ = {
 "_edit_group_": true
@@ -603,7 +642,7 @@ shape = SubResource( 40 )
 [node name="lader" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="lader"]
-position = Vector2( -28, 2 )
+position = Vector2( -28, 1.75 )
 shape = SubResource( 30 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="lader"]
@@ -615,7 +654,11 @@ position = Vector2( -11.8125, 17.25 )
 shape = SubResource( 32 )
 
 [node name="GoldenKey" type="Area2D" parent="."]
+position = Vector2( -4, 0 )
 script = ExtResource( 6 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GoldenKey"]
 position = Vector2( -22.25, -10 )
@@ -627,6 +670,7 @@ scale = Vector2( 0.464286, 0.333333 )
 texture = ExtResource( 2 )
 
 [connection signal="area_entered" from="Player/SwordHit" to="Enemy" method="_on_SwordHit_area_entered"]
+[connection signal="timeout" from="Player/Timer" to="Player" method="_on_Timer_timeout"]
 [connection signal="area_entered" from="Enemy/HitBox" to="Player" method="_on_HitBox_area_entered"]
 [connection signal="body_entered" from="lader" to="Player" method="_on_ladder_body_entered"]
 [connection signal="body_entered" from="lader" to="Enemy" method="_on_lader_body_entered"]
