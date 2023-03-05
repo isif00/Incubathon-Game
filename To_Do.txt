@@ -1,0 +1,21 @@
+1 - add Hit aniamtion  when jumping
+2 - SCORE 
+	
+	* Display Score 
+	* The key Apear when a specific socred is reached 
+
+	
+3 - Helath Display 
+
+
+4 - Enemy :
+	spawning enemies
+	implementing the flying enemies 
+	
+
+Resources :
+
+-- Layers and masks to fix interaction between enemies and player 
+youtube.com/watch?v=c59PHMLrCj8
+
+

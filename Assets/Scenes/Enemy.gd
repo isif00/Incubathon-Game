@@ -9,6 +9,8 @@ var is_on_ladder = false
 
 var IN = false
 
+
+
 func _physics_process(delta):
 	
 	if is_on_floor():
@@ -39,6 +41,7 @@ func _physics_process(delta):
 
 func _on_SwordHit_area_entered(area):
 	if area.is_in_group("HitBox"):
+	
 		queue_free()
 
 
