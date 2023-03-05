@@ -479,19 +479,22 @@ start_node = "Idle"
 extents = Vector2( 1.94444, 0.694444 )
 
 [sub_resource type="RectangleShape2D" id=39]
-extents = Vector2( 2, 2 )
+extents = Vector2( 0.75, 1 )
 
 [sub_resource type="RectangleShape2D" id=40]
-extents = Vector2( 1.5, 1.5 )
+extents = Vector2( 1.25, 1.25 )
 
 [sub_resource type="RectangleShape2D" id=30]
-extents = Vector2( 3, 7 )
+
+extents = Vector2( 0.25, 8.5 )
+
 
 [sub_resource type="RectangleShape2D" id=31]
-extents = Vector2( 3, 10.5 )
+extents = Vector2( 0.125, 11.25 )
 
 [sub_resource type="RectangleShape2D" id=32]
-extents = Vector2( 3, 7.25 )
+
+extents = Vector2( 0.1875, 8.25  )
 
 [sub_resource type="TileSet" id=2]
 0/name = "platformer.png 0"
@@ -615,11 +618,12 @@ parameters/playback = SubResource( 28 )
 [node name="SwordHit" type="Area2D" parent="Player" groups=["Sword_Hit"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player/SwordHit"]
-position = Vector2( -1.94444, -3.19444 )
+position = Vector2( -1.944, -3.194 )
 shape = SubResource( 38 )
 disabled = true
 
-[node name="Enemy" type="KinematicBody2D" parent="."]
+[node name="Enemy" type="KinematicBody2D" parent="." groups=["Enemy"]]
+position = Vector2( 23, 0 )
 script = ExtResource( 7 )
 __meta__ = {
 "_edit_group_": true
@@ -648,10 +652,11 @@ position = Vector2( -28, 2 )
 shape = SubResource( 30 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="lader"]
-position = Vector2( 28, 13.5 )
+position = Vector2( 28.125, 12.25 )
 shape = SubResource( 31 )
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="lader"]
+
 position = Vector2( -12, 18.25 )
 shape = SubResource( 32 )
 
@@ -694,7 +699,9 @@ shape = SubResource( 42 )
 [connection signal="area_entered" from="Player/SwordHit" to="Enemy" method="_on_SwordHit_area_entered"]
 [connection signal="area_entered" from="Enemy/HitBox" to="Player" method="_on_HitBox_area_entered"]
 [connection signal="body_entered" from="lader" to="Player" method="_on_ladder_body_entered"]
+[connection signal="body_entered" from="lader" to="Enemy" method="_on_lader_body_entered"]
 [connection signal="body_exited" from="lader" to="Player" method="_on_ladder_body_exited"]
+
 [connection signal="body_entered" from="Door" to="Key" method="_on_Door_body_entered"]
 [connection signal="body_exited" from="Door" to="Key" method="_on_Door_body_exited"]
 [connection signal="chest_opened" from="Key" to="Door" method="_on_StaticBody2D_chest_opened"]

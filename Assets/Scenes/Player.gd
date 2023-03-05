@@ -84,8 +84,10 @@ func _physics_process(delta):
 	
 	if facing_right == true:
 		$Sprite.scale.x = 0.194
+		get_node("SwordHit/CollisionShape2D").position.x = -1.944
 	else:
 		$Sprite.scale.x = -0.194
+		get_node("SwordHit/CollisionShape2D").position.x = -8.056
 	
 		
 	get_input()
@@ -140,7 +142,6 @@ func _physics_process(delta):
 				print("attacking !")
 				state_machine.travel("hit")
 				velocity.x *= -0.5
-				
 				
 				
 		elif input_vector.x == 0  :
