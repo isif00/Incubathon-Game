@@ -31,9 +31,15 @@ var input_vector = Vector2.ZERO
 
 
 
-func _ready():
+
+func _ready():		
 	state_machine = $AnimationTree.get("parameters/playback")
+	
 	$hurt.visible = false 
+	
+func _process(delta):
+	var Score = get_parent().get_node("SCORE/UI/Control/ScoreText")
+	Score.text = str(score)
 	
 func get_input():
 	input_vector.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")  # set the speed diection	
@@ -63,11 +69,23 @@ func _on_Timer_timeout():
 	$hurt.visible =  false
 
 func _on_HitBox_area_entered(area):
+	var Health_1 = get_parent().get_node("Hearts/HeartFull")
+	var Health_2 = get_parent().get_node("Hearts/HeartFull2")
+	var Health_3 = get_parent().get_node("Hearts/HeartFull3")
+	
 	if area.is_in_group("Sword_Hit"):
 		score += 1
 		
 	if area.is_in_group("HitBox_PLayer"):
 		health -= 1	
+		
+		Health_1.visible = false
+		
+		if health == 1:
+			Health_2.visible = false
+			
+		if health == 0:
+			Health_3.visible = false
 			
 		$Sprite.visible = false 
 		$hurt.visible = true 
@@ -77,8 +95,8 @@ func _on_HitBox_area_entered(area):
 			death = true			
 	
 func _physics_process(delta):
-		
-	if score == 1 :
+	
+	if score == 20 :
 		print("winner")
 	
 	if facing_right == true:

@@ -708,6 +708,7 @@ tile_data = PoolIntArray( -131070, 1, 0, -65535, 2, 0, 1, 1, 0 )
 
 [node name="Key" type="StaticBody2D" parent="."]
 position = Vector2( 28, -2 )
+z_index = 10
 script = ExtResource( 6 )
 __meta__ = {
 "_edit_group_": true
@@ -724,11 +725,64 @@ texture = ExtResource( 2 )
 position = Vector2( -28, -11 )
 shape = SubResource( 50 )
 
-[node name="PixelHeartSpriteSheet32X32" type="Sprite" parent="."]
-position = Vector2( 40, -26 )
-scale = Vector2( 0.151042, 0.15625 )
+[node name="Hearts" type="Node2D" parent="."]
+position = Vector2( 44, -25 )
+scale = Vector2( 0.148438, 0.171875 )
+
+[node name="HeartFull" type="Sprite" parent="Hearts"]
+position = Vector2( -4.21048, -1.45454 )
 z_index = 10
 texture = ExtResource( 10 )
+hframes = 3
+
+[node name="HeartEmpty" type="Sprite" parent="Hearts"]
+position = Vector2( -4.21048, -1.45454 )
+z_index = 10
+texture = ExtResource( 10 )
+hframes = 3
+frame = 2
+
+[node name="HeartFull2" type="Sprite" parent="Hearts"]
+position = Vector2( -37.8946, 4.36365 )
+z_index = 10
+texture = ExtResource( 10 )
+hframes = 3
+
+[node name="HeartEmpty2" type="Sprite" parent="Hearts"]
+position = Vector2( -37.8946, 4.36365 )
+z_index = 10
+texture = ExtResource( 10 )
+hframes = 3
+frame = 2
+
+[node name="HeartFull3" type="Sprite" parent="Hearts"]
+position = Vector2( -71.5787, -1.45454 )
+z_index = 10
+texture = ExtResource( 10 )
+hframes = 3
+
+[node name="HeartEmpty3" type="Sprite" parent="Hearts"]
+position = Vector2( -71.5787, -1.45454 )
+z_index = 10
+texture = ExtResource( 10 )
+hframes = 3
+frame = 2
+
+[node name="SCORE" type="Node2D" parent="."]
+
+[node name="UI" type="CanvasLayer" parent="SCORE"]
+
+[node name="Control" type="Control" parent="SCORE/UI"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="ScoreText" type="RichTextLabel" parent="SCORE/UI/Control"]
+margin_left = 488.0
+margin_top = 37.0
+margin_right = 590.0
+margin_bottom = 63.0
+tab_size = 9
+text = "0"
 
 [connection signal="area_entered" from="Player/SwordHit" to="Enemy" method="_on_SwordHit_area_entered"]
 [connection signal="timeout" from="Player/Timer" to="Player" method="_on_Timer_timeout"]
