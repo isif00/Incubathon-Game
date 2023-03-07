@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Assets/Scripts/lader.gd" type="Script" id=1]
+
+[sub_resource type="RectangleShape2D" id=30]
+extents = Vector2( 0.25, 8.75 )
+
+[sub_resource type="RectangleShape2D" id=31]
+extents = Vector2( 0.125, 11.25 )
+
+[sub_resource type="RectangleShape2D" id=32]
+extents = Vector2( 0.1875, 8.25 )
+
+[node name="lader" type="Area2D" groups=["Lader"]]
+script = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -28, 1.75 )
+shape = SubResource( 30 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2( 28.125, 12.25 )
+shape = SubResource( 31 )
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
+position = Vector2( -11.8125, 17.25 )
+shape = SubResource( 32 )
+
+[connection signal="body_entered" from="." to="." method="_on_lader_body_entered"]

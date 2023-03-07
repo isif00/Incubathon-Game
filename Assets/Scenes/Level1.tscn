@@ -1,9 +1,10 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Assets/microFantasy.v0.4/tilesets/platformer.png" type="Texture" id=1]
 [ext_resource path="res://Assets/microFantasy.v0.4/items/key_gold.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Scenes/Enemy.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Assets/Scenes/Player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/Scenes/lader.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/Scripts/Key.gd" type="Script" id=6]
 [ext_resource path="res://Assets/Scripts/Level1.gd" type="Script" id=7]
 [ext_resource path="res://Assets/Scripts/Door.gd" type="Script" id=9]
@@ -273,15 +274,6 @@ points = PoolVector2Array( 0, 0, 25, 0, 25, 4, 0, 4 )
 5/shapes = [  ]
 5/z_index = 0
 
-[sub_resource type="RectangleShape2D" id=30]
-extents = Vector2( 0.25, 8.75 )
-
-[sub_resource type="RectangleShape2D" id=31]
-extents = Vector2( 0.125, 11.25 )
-
-[sub_resource type="RectangleShape2D" id=32]
-extents = Vector2( 0.1875, 8.25 )
-
 [sub_resource type="RectangleShape2D" id=49]
 extents = Vector2( 7, 7 )
 
@@ -356,20 +348,9 @@ tile_data = PoolIntArray( -196614, 1, 0, -65541, 3, 0, -5, 0, 0, -4, 2, 0, 65532
 [node name="Player" parent="." instance=ExtResource( 4 )]
 
 [node name="Enemy" parent="." instance=ExtResource( 3 )]
+position = Vector2( -8, 0 )
 
-[node name="lader" type="Area2D" parent="." groups=["Lader"]]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="lader"]
-position = Vector2( -28, 1.75 )
-shape = SubResource( 30 )
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="lader"]
-position = Vector2( 28.125, 12.25 )
-shape = SubResource( 31 )
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="lader"]
-position = Vector2( -11.8125, 17.25 )
-shape = SubResource( 32 )
+[node name="lader" parent="." instance=ExtResource( 5 )]
 
 [node name="Door" type="StaticBody2D" parent="."]
 script = ExtResource( 9 )
@@ -423,10 +404,6 @@ texture = ExtResource( 10 )
 [node name="SpawnTimer" type="Timer" parent="."]
 autostart = true
 
-[connection signal="body_entered" from="lader" to="Player" method="_on_lader_body_entered"]
-[connection signal="body_entered" from="lader" to="Enemy" method="_on_lader_body_entered"]
-[connection signal="body_exited" from="lader" to="Player" method="_on_lader_body_exited"]
-[connection signal="body_exited" from="lader" to="Enemy" method="_on_lader_body_exited"]
 [connection signal="body_entered" from="Door/Door" to="Key" method="_on_Door_body_entered"]
 [connection signal="body_exited" from="Door/Door" to="Key" method="_on_Door_body_exited"]
 [connection signal="door_opened" from="Key" to="Door" method="_on_Key_door_opened"]

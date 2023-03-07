@@ -29,15 +29,26 @@ var run_animation
 
 var input_vector = Vector2.ZERO
 
-
+var enemy_nodes
 
 func _ready():
 	state_machine = $AnimationTree.get("parameters/playback")
 	$hurt.visible = false 
-	var enemyNode = get_tree().get_root().find_node("Enemy",true,false)
-	enemyNode.connect("hitPlayer",self,"handle_Player_Hurt")
-	
+#	enemyNode = get_tree().get_root().find_node("Enemy",true,false)
+#	enemyNode.connect("hitPlayer",self,"handle_Player_Hurt")
+
+
+
 func get_input():
+	
+	# Get all instances of the "Enemy" scene
+	enemy_nodes = get_tree().get_nodes_in_group("Enemy")
+#
+#	# Connect the "hitPlayer" signal for each instance of the "Enemy" scene
+	for enemy_node in enemy_nodes:
+		enemy_node.connect("hitPlayer", self, "handle_Player_Hurt")	
+	
+	
 	input_vector.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")  # set the speed diection	
 	var jump_pressed = Input.is_action_just_pressed("jump")
 	attack = Input.is_action_just_pressed("shoot")
@@ -68,7 +79,9 @@ func _on_Timer_timeout():
 
 func handle_Enemy_Killed():
 	score += 1
-	
+
+
+			
 func handle_Player_Hurt():
 	health -= 1	
 
@@ -93,7 +106,8 @@ func _physics_process(delta):
 	
 	get_input()
 				
-	var current_aniamtion = state_machine.get_current_node() 
+	var current_aniamtion = state_machine.get_current_node()
+	
 	
 	if climbing:
 		on_ladder = true
