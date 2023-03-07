@@ -23,6 +23,7 @@ func _ready():
 	lader_node.connect("out_laderSig", self, "_on_ladder_exit")
 	ladder_states[get_instance_id()] = false
 
+
 func _physics_process(delta):
 	if ladder_states.get(get_instance_id(), false):
 		velocity.y = -speed
@@ -39,6 +40,7 @@ func _physics_process(delta):
 			$PotionGreen.scale.x *= -1
 
 	velocity = move_and_slide(velocity*delta, Vector2.UP)
+
 
 func _on_ladder_enter():
 	ladder_states[get_instance_id()] = false # true 

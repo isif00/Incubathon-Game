@@ -31,14 +31,17 @@ var input_vector = Vector2.ZERO
 
 var enemy_nodes
 
-func _ready():
+
+func _ready():		
 	state_machine = $AnimationTree.get("parameters/playback")
+	
 	$hurt.visible = false 
-#	enemyNode = get_tree().get_root().find_node("Enemy",true,false)
-#	enemyNode.connect("hitPlayer",self,"handle_Player_Hurt")
 
-
-
+	
+func _process(delta):
+	var Score = get_parent().get_node("SCORE/UI/Control/ScoreText")
+	Score.text = str(score)
+	
 func get_input():
 	
 	# Get all instances of the "Enemy" scene
@@ -81,6 +84,25 @@ func handle_Enemy_Killed():
 	score += 1
 
 
+
+func _on_HitBox_area_entered(area):
+	var Health_1 = get_parent().get_node("Hearts/HeartFull")
+	var Health_2 = get_parent().get_node("Hearts/HeartFull2")
+	var Health_3 = get_parent().get_node("Hearts/HeartFull3")
+	
+	if area.is_in_group("Sword_Hit"):
+		score += 1
+		
+	if area.is_in_group("HitBox_PLayer"):
+		health -= 1	
+		
+		Health_1.visible = false
+		
+		if health == 1:
+			Health_2.visible = false
+			
+		if health == 0:
+			Health_3.visible = false
 			
 func handle_Player_Hurt():
 	health -= 1	
@@ -93,8 +115,8 @@ func handle_Player_Hurt():
 		death = true
 	
 func _physics_process(delta):
-		
-	if score == 1 :
+	
+	if score == 20 :
 		print("winner")
 	
 	if facing_right == true:
