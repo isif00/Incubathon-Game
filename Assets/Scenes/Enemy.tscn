@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Assets/Scripts/Enemy.gd" type="Script" id=1]
+[ext_resource path="res://Assets/microFantasy.v0.4/items/potion_green.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=39]
+extents = Vector2( 0.75, 1 )
+
+[sub_resource type="RectangleShape2D" id=40]
+extents = Vector2( 2, 1.625 )
+
+[node name="Enemy" type="KinematicBody2D" groups=["Enemy"]]
+position = Vector2( -39, -14 )
+z_index = 3
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 11, 22 )
+shape = SubResource( 39 )
+
+[node name="PotionGreen" type="Sprite" parent="."]
+position = Vector2( 11, 22 )
+scale = Vector2( 0.642857, 0.5 )
+texture = ExtResource( 2 )
+
+[node name="HitBox" type="Area2D" parent="." groups=["HitBox"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+modulate = Color( 0.207843, 0.596078, 0.0509804, 1 )
+position = Vector2( 11, 21.625 )
+shape = SubResource( 40 )
+
+[connection signal="area_entered" from="HitBox" to="." method="_on_HitBox_area_entered"]
