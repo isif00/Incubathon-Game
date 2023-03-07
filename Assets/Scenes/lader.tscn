@@ -26,4 +26,7 @@ shape = SubResource( 31 )
 position = Vector2( -11.8125, 17.25 )
 shape = SubResource( 32 )
 
+[connection signal="area_entered" from="." to="." method="_on_lader_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_lader_area_exited"]
 [connection signal="body_entered" from="." to="." method="_on_lader_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_lader_body_exited"]

@@ -348,7 +348,10 @@ tile_data = PoolIntArray( -196614, 1, 0, -65541, 3, 0, -5, 0, 0, -4, 2, 0, 65532
 [node name="Player" parent="." instance=ExtResource( 4 )]
 
 [node name="Enemy" parent="." instance=ExtResource( 3 )]
-position = Vector2( -8, 0 )
+position = Vector2( 16, -7 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="lader" parent="." instance=ExtResource( 5 )]
 
@@ -402,8 +405,11 @@ z_index = 10
 texture = ExtResource( 10 )
 
 [node name="SpawnTimer" type="Timer" parent="."]
+wait_time = 7.0
 autostart = true
 
+[connection signal="body_entered" from="lader" to="Player" method="_on_lader_body_entered"]
+[connection signal="body_exited" from="lader" to="Player" method="_on_lader_body_exited"]
 [connection signal="body_entered" from="Door/Door" to="Key" method="_on_Door_body_entered"]
 [connection signal="body_exited" from="Door/Door" to="Key" method="_on_Door_body_exited"]
 [connection signal="door_opened" from="Key" to="Door" method="_on_Key_door_opened"]

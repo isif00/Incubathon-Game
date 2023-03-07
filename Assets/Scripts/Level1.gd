@@ -13,6 +13,6 @@ func _on_SpawnTimer_timeout():
 	enemy.add_to_group("Enemy")
 	if enemy.is_in_group("Enemy"):
 		print("Enemy added to the 'Enemy' group")
+		enemy.position = Vector2(50,0)
 	
-#	print(enemy_nodes)
-	$SpawnTimer.stop()
+	
