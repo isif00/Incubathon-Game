@@ -29,9 +29,6 @@ var run_animation
 
 var input_vector = Vector2.ZERO
 
-
-
-
 func _ready():		
 	state_machine = $AnimationTree.get("parameters/playback")
 	
@@ -92,7 +89,9 @@ func _on_HitBox_area_entered(area):
 		$Timer.start()
 		
 		if health <= 0:
-			death = true			
+			death = true
+			$Timer.start()
+			get_tree().change_scene("res://Assets/Scenes/Level1.tscn")	
 	
 func _physics_process(delta):
 	

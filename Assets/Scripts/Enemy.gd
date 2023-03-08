@@ -29,10 +29,11 @@ func _physics_process(delta):
 	velocity = move_and_slide(velocity*delta, Vector2.UP)
 	
 
-func _on_SwordHit_area_entered(area):
-	if area.is_in_group("HitBox"):
-	
-		queue_free()
+
+#func _on_SwordHit_area_entered(area):
+#	if area.is_in_group("HitBox"):
+#		print("qmsdfh apfpaefngpae nf")
+#		queue_free()
 
 
 func _on_lader_body_entered(body):
@@ -45,3 +46,9 @@ func _on_lader_body_exited(body):
 		is_on_ladder = false
 		print("OUT")
 		
+
+
+func _on_HitBox_area_entered(area):
+	if area.is_in_group("Sword_Hit"):
+		print("qmsdfh apfpaefngpae nf")
+		queue_free()
