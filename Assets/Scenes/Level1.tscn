@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=2]
+[gd_scene load_steps=61 format=2]
 
 [ext_resource path="res://Assets/microFantasy.v0.4/tilesets/platformer.png" type="Texture" id=1]
 [ext_resource path="res://Assets/microFantasy.v0.4/items/key_gold.png" type="Texture" id=2]
@@ -567,6 +567,37 @@ extents = Vector2( 7, 6 )
 [sub_resource type="RectangleShape2D" id=50]
 extents = Vector2( 2, 2.5 )
 
+[sub_resource type="Animation" id=51]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 6 ]
+}
+
+[sub_resource type="Animation" id=52]
+resource_name = "RUN"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( -0.1, 0.2, 0.6, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 2, 4, 6 ]
+}
+
 [node name="LEVEL1" type="Node2D"]
 
 [node name="Background" type="Node" parent="."]
@@ -867,6 +898,10 @@ z_index = 10
 texture = ExtResource( 11 )
 vframes = 7
 frame = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Run"]
+anims/RESET = SubResource( 51 )
+anims/RUN = SubResource( 52 )
 
 [connection signal="area_entered" from="Player/SwordHit" to="Enemy" method="_on_SwordHit_area_entered"]
 [connection signal="timeout" from="Player/Timer" to="Player" method="_on_Timer_timeout"]
