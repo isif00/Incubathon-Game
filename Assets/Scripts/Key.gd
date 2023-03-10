@@ -15,10 +15,9 @@ func _on_Area2D_body_entered(body):
 		
 func _process(delta):
 	if is_taken == true:
-		if is_on_location:
-			if Input.is_action_just_pressed("shoot"):
-				print("qpsifd qsodf")
-				emit_signal("door_opened")
+		if Input.is_action_just_pressed("shoot"):
+			print("qpsifd qsodf")
+			emit_signal("door_opened")
 				
 			
 
