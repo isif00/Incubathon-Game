@@ -14,13 +14,17 @@ func _on_Area2D_body_entered(body):
 		$KeyGold.queue_free()
 		
 func _process(delta):
-	if is_taken == true and is_on_location:
-		if Input.is_action_just_pressed("shoot"):
-			emit_signal("door_opened")
+	if is_taken == true:
+		if is_on_location:
+			if Input.is_action_just_pressed("shoot"):
+				print("qpsifd qsodf")
+				emit_signal("door_opened")
+				
 			
 
 func _on_Door_body_entered(body: PhysicsBody2D):
 	is_on_location = true
+	print("sifoooooo", is_on_location)
 	print(is_on_location)
 
 
