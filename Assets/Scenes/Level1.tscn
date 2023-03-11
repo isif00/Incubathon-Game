@@ -1,13 +1,24 @@
-[gd_scene load_steps=55 format=2]
+[gd_scene load_steps=67 format=2]
 
 [ext_resource path="res://Assets/microFantasy.v0.4/tilesets/platformer.png" type="Texture" id=1]
 [ext_resource path="res://Assets/microFantasy.v0.4/items/key_gold.png" type="Texture" id=2]
 [ext_resource path="res://Assets/microFantasy.v0.4/items/potion_green.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Ninja_Free(FIXED)/Ninja.png" type="Texture" id=4]
-[ext_resource path="res://Assets/Scenes/Player.gd" type="Script" id=5]
-[ext_resource path="res://Assets/Scenes/key.gd" type="Script" id=6]
-[ext_resource path="res://Assets/Scenes/Enemy.gd" type="Script" id=7]
+[ext_resource path="res://Assets/Scripts/Player.gd" type="Script" id=5]
+[ext_resource path="res://Assets/Scripts/Key.gd" type="Script" id=6]
+[ext_resource path="res://Assets/Scripts/Enemy.gd" type="Script" id=7]
 [ext_resource path="res://Assets/Ninja_hurt.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Scripts/Door2.gd" type="Script" id=9]
+[ext_resource path="res://Assets/Pixel Heart Sprite Sheet 32x32.png" type="Texture" id=10]
+[ext_resource path="res://Audio/SFX/key_pickup.wav" type="AudioStream" id=11]
+[ext_resource path="res://Audio/Levels_Bg_Muic/Level1.mp3" type="AudioStream" id=12]
+[ext_resource path="res://Audio/SFX/ough-HURT1.mp3" type="AudioStream" id=13]
+[ext_resource path="res://Audio/SFX/jump.mp3" type="AudioStream" id=14]
+[ext_resource path="res://Audio/SFX/enemy-killed.mp3" type="AudioStream" id=15]
+[ext_resource path="res://Audio/SFX/melee_attack1.mp3" type="AudioStream" id=16]
+[ext_resource path="res://Audio/SFX/opne-doors.mp3" type="AudioStream" id=17]
+[ext_resource path="res://Assets/Scripts/2nd_Type_Enemie.gd" type="Script" id=18]
+[ext_resource path="res://Assets/2nd_type_Enemie/Bat.png" type="Texture" id=19]
 
 [sub_resource type="ConvexPolygonShape2D" id=5]
 points = PoolVector2Array( 0, 0, 8, 0, 8, 8, 0, 8 )
@@ -177,36 +188,6 @@ points = PoolVector2Array( 0, 0, 8, 0, 8, 8, 0, 8 )
 8/shapes = [  ]
 8/z_index = 0
 
-[sub_resource type="TileSet" id=2]
-0/name = "platformer.png 0"
-0/texture = ExtResource( 1 )
-0/tex_offset = Vector2( 0, 0 )
-0/modulate = Color( 1, 1, 1, 1 )
-0/region = Rect2( 0, 43, 16, 13 )
-0/tile_mode = 0
-0/occluder_offset = Vector2( 0, 0 )
-0/navigation_offset = Vector2( 0, 0 )
-0/shape_offset = Vector2( 0, 0 )
-0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-0/shape_one_way = false
-0/shape_one_way_margin = 0.0
-0/shapes = [  ]
-0/z_index = 0
-1/name = "platformer.png 1"
-1/texture = ExtResource( 1 )
-1/tex_offset = Vector2( 0, 0 )
-1/modulate = Color( 1, 1, 1, 1 )
-1/region = Rect2( 33, 31, 7, 9 )
-1/tile_mode = 0
-1/occluder_offset = Vector2( 0, 0 )
-1/navigation_offset = Vector2( 0, 0 )
-1/shape_offset = Vector2( 0, 0 )
-1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-1/shape_one_way = false
-1/shape_one_way_margin = 0.0
-1/shapes = [  ]
-1/z_index = 0
-
 [sub_resource type="ConvexPolygonShape2D" id=9]
 points = PoolVector2Array( 0, 0, 25, 0, 25, 4, 0, 4 )
 
@@ -288,6 +269,20 @@ points = PoolVector2Array( 0, 0, 25, 0, 25, 4, 0, 4 )
 4/shape_one_way_margin = 0.0
 4/shapes = [  ]
 4/z_index = 0
+5/name = "platformer.png 5"
+5/texture = ExtResource( 1 )
+5/tex_offset = Vector2( 0, 0 )
+5/modulate = Color( 1, 1, 1, 1 )
+5/region = Rect2( 16, 43, 17, 13 )
+5/tile_mode = 0
+5/occluder_offset = Vector2( 0, 0 )
+5/navigation_offset = Vector2( 0, 0 )
+5/shape_offset = Vector2( 0, 0 )
+5/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+5/shape_one_way = false
+5/shape_one_way_margin = 0.0
+5/shapes = [  ]
+5/z_index = 0
 
 [sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 1.66667, 1.92688 )
@@ -530,29 +525,71 @@ extents = Vector2( 0.125, 11.25 )
 [sub_resource type="RectangleShape2D" id=32]
 extents = Vector2( 0.1875, 8.25 )
 
-[sub_resource type="RectangleShape2D" id=33]
-extents = Vector2( 1.25, 2 )
+[sub_resource type="RectangleShape2D" id=53]
+extents = Vector2( 7, 7 )
+
+[sub_resource type="TileSet" id=54]
+0/name = "platformer.png 0"
+0/texture = ExtResource( 1 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 43, 16, 13 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
+1/name = "platformer.png 1"
+1/texture = ExtResource( 1 )
+1/tex_offset = Vector2( 0, 0 )
+1/modulate = Color( 1, 1, 1, 1 )
+1/region = Rect2( 33, 31, 7, 9 )
+1/tile_mode = 0
+1/occluder_offset = Vector2( 0, 0 )
+1/navigation_offset = Vector2( 0, 0 )
+1/shape_offset = Vector2( 0, 0 )
+1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+1/shape_one_way = false
+1/shape_one_way_margin = 0.0
+1/shapes = [  ]
+1/z_index = 0
+2/name = "platformer.png 2"
+2/texture = ExtResource( 1 )
+2/tex_offset = Vector2( 0, 0 )
+2/modulate = Color( 1, 1, 1, 1 )
+2/region = Rect2( 16, 43, 16, 13 )
+2/tile_mode = 0
+2/occluder_offset = Vector2( 0, 0 )
+2/navigation_offset = Vector2( 0, 0 )
+2/shape_offset = Vector2( 0, 0 )
+2/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+2/shape_one_way = false
+2/shape_one_way_margin = 0.0
+2/shapes = [  ]
+2/z_index = 0
+
+[sub_resource type="RectangleShape2D" id=55]
+extents = Vector2( 2, 2.5 )
 
 [node name="LEVEL1" type="Node2D"]
 
-[node name="TileMap" type="TileMap" parent="."]
+[node name="Background" type="Node" parent="."]
+
+[node name="Background" type="TileMap" parent="Background"]
 tile_set = SubResource( 1 )
 cell_size = Vector2( 8, 8 )
 format = 1
 tile_data = PoolIntArray( -196615, 1, 0, -196614, 1, 0, -196613, 1, 0, -196612, 1, 0, -196611, 1, 0, -196610, 1, 0, -196609, 1, 0, -262144, 1, 0, -262143, 1, 0, -262142, 1, 0, -262141, 1, 0, -262140, 1, 0, -262139, 1, 0, -262138, 1, 0, -131079, 1, 0, -131078, 0, 0, -131077, 0, 0, -131076, 0, 0, -131075, 0, 0, -131074, 0, 0, -131073, 0, 0, -196608, 0, 0, -196607, 0, 0, -196606, 0, 0, -196605, 0, 0, -196604, 0, 0, -196603, 0, 0, -196602, 1, 0, -65543, 1, 0, -65542, 0, 0, -65541, 0, 0, -65540, 0, 0, -65539, 0, 0, -65538, 0, 0, -65537, 0, 0, -131072, 0, 0, -131071, 0, 0, -131070, 0, 0, -131069, 0, 0, -131068, 0, 0, -131067, 0, 0, -131066, 1, 0, -7, 1, 0, -6, 0, 0, -5, 0, 0, -4, 0, 0, -3, 0, 0, -2, 0, 0, -1, 0, 0, -65536, 0, 0, -65535, 0, 0, -65534, 0, 0, -65533, 0, 0, -65532, 0, 0, -65531, 0, 0, -65530, 1, 0, 65529, 1, 0, 65530, 0, 0, 65531, 0, 0, 65532, 0, 0, 65533, 0, 0, 65534, 0, 0, 65535, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 1, 0, 131065, 1, 0, 131066, 0, 0, 131067, 0, 0, 131068, 0, 0, 131069, 0, 0, 131070, 0, 0, 131071, 0, 0, 65536, 0, 0, 65537, 0, 0, 65538, 0, 0, 65539, 0, 0, 65540, 0, 0, 65541, 0, 0, 65542, 1, 0, 196601, 1, 0, 196602, 0, 0, 196603, 0, 0, 196604, 0, 0, 196605, 0, 0, 196606, 0, 0, 196607, 0, 0, 131072, 0, 0, 131073, 0, 0, 131074, 0, 0, 131075, 0, 0, 131076, 0, 0, 131077, 0, 0, 131078, 1, 0, 262137, 1, 0, 262138, 1, 0, 262139, 1, 0, 262140, 1, 0, 262141, 1, 0, 262142, 1, 0, 262143, 1, 0, 196608, 1, 0, 196609, 1, 0, 196610, 1, 0, 196611, 1, 0, 196612, 1, 0, 196613, 1, 0, 196614, 1, 0 )
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="Background"]
 current = true
 zoom = Vector2( 0.1, 0.1 )
 
-[node name="TileMap2" type="TileMap" parent="."]
-tile_set = SubResource( 2 )
-cell_size = Vector2( 15, 13 )
-cell_custom_transform = Transform2D( 10, 0, 0, 10, 0, 0 )
-format = 1
-tile_data = PoolIntArray( -131070, 1, 0, -65535, 0, 0, 1, 1, 0 )
-
-[node name="TileMap3" type="TileMap" parent="."]
+[node name="Decorators" type="TileMap" parent="Background"]
 tile_set = SubResource( 3 )
 cell_size = Vector2( 8, 8 )
 format = 1
@@ -560,6 +597,7 @@ tile_data = PoolIntArray( -196614, 1, 0, -65541, 3, 0, -5, 0, 0, -4, 2, 0, 65532
 
 [node name="Player" type="KinematicBody2D" parent="." groups=["Climber"]]
 scale = Vector2( 1.8, 1.8 )
+z_index = 3
 script = ExtResource( 5 )
 jump_speed = -35
 gravity = 70
@@ -615,9 +653,27 @@ shape = SubResource( 41 )
 [node name="Timer" type="Timer" parent="Player"]
 wait_time = 0.2
 
+[node name="jump_SFX" type="AudioStreamPlayer" parent="Player"]
+stream = ExtResource( 14 )
+volume_db = -8.758
+
+[node name="player_get_hurt" type="AudioStreamPlayer" parent="Player"]
+stream = ExtResource( 13 )
+volume_db = -8.758
+
+[node name="melee_attack" type="AudioStreamPlayer" parent="Player"]
+stream = ExtResource( 16 )
+volume_db = -8.758
+pitch_scale = 1.36
+
+[node name="enemy_killed" type="AudioStreamPlayer" parent="Player"]
+stream = ExtResource( 15 )
+volume_db = -8.758
+pitch_scale = 1.36
+
 [node name="Enemy" type="KinematicBody2D" parent="." groups=["Enemy"]]
 position = Vector2( -39, -14 )
-z_index = 1
+z_index = 3
 script = ExtResource( 7 )
 __meta__ = {
 "_edit_group_": true
@@ -639,6 +695,78 @@ modulate = Color( 0.207843, 0.596078, 0.0509804, 1 )
 position = Vector2( 11, 22 )
 shape = SubResource( 40 )
 
+[node name="Enemy2" type="KinematicBody2D" parent="." groups=["Enemy"]]
+position = Vector2( -14, -32 )
+z_index = 3
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy2"]
+position = Vector2( 11, 22 )
+shape = SubResource( 39 )
+
+[node name="PotionGreen" type="Sprite" parent="Enemy2"]
+position = Vector2( 11, 22 )
+scale = Vector2( 0.642857, 0.5 )
+texture = ExtResource( 3 )
+
+[node name="HitBox" type="Area2D" parent="Enemy2" groups=["HitBox"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy2/HitBox"]
+modulate = Color( 0.207843, 0.596078, 0.0509804, 1 )
+position = Vector2( 11, 22 )
+shape = SubResource( 40 )
+
+[node name="Enemy3" type="KinematicBody2D" parent="." groups=["Enemy"]]
+position = Vector2( 33, 1 )
+z_index = 3
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy3"]
+position = Vector2( 11, 22 )
+shape = SubResource( 39 )
+
+[node name="PotionGreen" type="Sprite" parent="Enemy3"]
+position = Vector2( 11, 22 )
+scale = Vector2( 0.642857, 0.5 )
+texture = ExtResource( 3 )
+
+[node name="HitBox" type="Area2D" parent="Enemy3" groups=["HitBox"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy3/HitBox"]
+modulate = Color( 0.207843, 0.596078, 0.0509804, 1 )
+position = Vector2( 11, 22 )
+shape = SubResource( 40 )
+
+[node name="Enemy4" type="KinematicBody2D" parent="." groups=["Enemy"]]
+position = Vector2( -16, -3 )
+z_index = 3
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy4"]
+position = Vector2( 11, 22 )
+shape = SubResource( 39 )
+
+[node name="PotionGreen" type="Sprite" parent="Enemy4"]
+position = Vector2( 11, 22 )
+scale = Vector2( 0.642857, 0.5 )
+texture = ExtResource( 3 )
+
+[node name="HitBox" type="Area2D" parent="Enemy4" groups=["HitBox"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy4/HitBox"]
+modulate = Color( 0.207843, 0.596078, 0.0509804, 1 )
+position = Vector2( 11, 22 )
+shape = SubResource( 40 )
+
 [node name="lader" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="lader"]
@@ -653,26 +781,154 @@ shape = SubResource( 31 )
 position = Vector2( -11.8125, 17.25 )
 shape = SubResource( 32 )
 
-[node name="GoldenKey" type="Area2D" parent="."]
-position = Vector2( -4, 0 )
+[node name="Hearts" type="Node2D" parent="."]
+position = Vector2( 44, -25 )
+scale = Vector2( 0.148438, 0.171875 )
+
+[node name="HeartFull" type="Sprite" parent="Hearts"]
+position = Vector2( -4.21048, -1.45454 )
+z_index = 10
+texture = ExtResource( 10 )
+hframes = 3
+
+[node name="HeartEmpty" type="Sprite" parent="Hearts"]
+position = Vector2( -4.21048, -1.45454 )
+z_index = 10
+texture = ExtResource( 10 )
+hframes = 3
+frame = 2
+
+[node name="HeartFull2" type="Sprite" parent="Hearts"]
+position = Vector2( -37.8946, 4.36365 )
+z_index = 10
+texture = ExtResource( 10 )
+hframes = 3
+
+[node name="HeartEmpty2" type="Sprite" parent="Hearts"]
+position = Vector2( -37.8946, 4.36365 )
+z_index = 10
+texture = ExtResource( 10 )
+hframes = 3
+frame = 2
+
+[node name="HeartFull3" type="Sprite" parent="Hearts"]
+position = Vector2( -71.5787, -1.45454 )
+z_index = 10
+texture = ExtResource( 10 )
+hframes = 3
+
+[node name="HeartEmpty3" type="Sprite" parent="Hearts"]
+position = Vector2( -71.5787, -1.45454 )
+z_index = 10
+texture = ExtResource( 10 )
+hframes = 3
+frame = 2
+
+[node name="SCORE" type="Node2D" parent="."]
+
+[node name="UI" type="CanvasLayer" parent="SCORE"]
+
+[node name="Control" type="Control" parent="SCORE/UI"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="ScoreText" type="RichTextLabel" parent="SCORE/UI/Control"]
+margin_left = 488.0
+margin_top = 37.0
+margin_right = 590.0
+margin_bottom = 63.0
+tab_size = 9
+text = "0"
+
+[node name="Door" type="StaticBody2D" parent="."]
+script = ExtResource( 9 )
+
+[node name="Door" type="Area2D" parent="Door"]
+
+[node name="DoorCollider" type="CollisionShape2D" parent="Door/Door"]
+position = Vector2( 23, -6 )
+shape = SubResource( 53 )
+
+[node name="Door_close" type="TileMap" parent="Door"]
+z_index = 1
+tile_set = SubResource( 54 )
+cell_size = Vector2( 15, 13 )
+cell_custom_transform = Transform2D( 10, 0, 0, 10, 0, 0 )
+format = 1
+tile_data = PoolIntArray( -131070, 1, 0, -65535, 0, 0 )
+
+[node name="Door_open" type="TileMap" parent="Door"]
+tile_set = SubResource( 54 )
+cell_size = Vector2( 15, 13 )
+cell_custom_transform = Transform2D( 10, 0, 0, 10, 0, 0 )
+format = 1
+tile_data = PoolIntArray( -131070, 1, 0, -65535, 2, 0, 1, 1, 0 )
+
+[node name="Timer" type="Timer" parent="Door"]
+wait_time = 0.337
+
+[node name="door_open_SFX" type="AudioStreamPlayer" parent="Door"]
+stream = ExtResource( 17 )
+volume_db = -2.0
+
+[node name="Key" type="StaticBody2D" parent="."]
+position = Vector2( 28, -2 )
+z_index = 10
 script = ExtResource( 6 )
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="GoldenKey"]
-position = Vector2( -22.25, -10 )
-shape = SubResource( 33 )
-
-[node name="KeyGold" type="Sprite" parent="GoldenKey"]
-position = Vector2( -22, -10 )
-scale = Vector2( 0.464286, 0.333333 )
+[node name="KeyGold" type="Sprite" parent="Key"]
+position = Vector2( -27.75, -10.5 )
+scale = Vector2( 0.5, 0.416667 )
 texture = ExtResource( 2 )
+
+[node name="Area2D" type="Area2D" parent="Key"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Key/Area2D"]
+position = Vector2( -28, -11 )
+shape = SubResource( 55 )
+
+[node name="key_collected" type="AudioStreamPlayer" parent="Key"]
+stream = ExtResource( 11 )
+volume_db = -8.758
+pitch_scale = 1.2
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 12 )
+autoplay = true
+
+[node name="2nd_Type_Enemie" type="KinematicBody2D" parent="."]
+script = ExtResource( 18 )
+
+[node name="Sprite" type="Sprite" parent="2nd_Type_Enemie"]
+position = Vector2( -16.5, -16.25 )
+scale = Vector2( 0.4375, 0.4375 )
+z_index = 2
+texture = ExtResource( 19 )
+hframes = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="2nd_Type_Enemie"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="2nd_Type_Enemie"]
 
 [connection signal="area_entered" from="Player/SwordHit" to="Enemy" method="_on_SwordHit_area_entered"]
 [connection signal="timeout" from="Player/Timer" to="Player" method="_on_Timer_timeout"]
 [connection signal="area_entered" from="Enemy/HitBox" to="Player" method="_on_HitBox_area_entered"]
+[connection signal="area_entered" from="Enemy/HitBox" to="Enemy" method="_on_HitBox_area_entered"]
+[connection signal="area_entered" from="Enemy2/HitBox" to="Player" method="_on_HitBox_area_entered"]
+[connection signal="area_entered" from="Enemy2/HitBox" to="Enemy2" method="_on_HitBox_area_entered"]
+[connection signal="area_entered" from="Enemy3/HitBox" to="Player" method="_on_HitBox_area_entered"]
+[connection signal="area_entered" from="Enemy3/HitBox" to="Enemy3" method="_on_HitBox_area_entered"]
+[connection signal="area_entered" from="Enemy4/HitBox" to="Player" method="_on_HitBox_area_entered"]
+[connection signal="area_entered" from="Enemy4/HitBox" to="Enemy4" method="_on_HitBox_area_entered"]
 [connection signal="body_entered" from="lader" to="Player" method="_on_ladder_body_entered"]
 [connection signal="body_entered" from="lader" to="Enemy" method="_on_lader_body_entered"]
 [connection signal="body_exited" from="lader" to="Player" method="_on_ladder_body_exited"]
 [connection signal="body_exited" from="lader" to="Enemy" method="_on_lader_body_exited"]
+[connection signal="body_entered" from="Door/Door" to="Key" method="_on_Door_body_entered"]
+[connection signal="body_exited" from="Door/Door" to="Key" method="_on_Door_body_exited"]
+[connection signal="timeout" from="Door/Timer" to="Door" method="_on_Timer_timeout"]
+[connection signal="door_opened" from="Key" to="Door" method="_on_Key_door_opened"]
+[connection signal="body_entered" from="Key/Area2D" to="Key" method="_on_Area2D_body_entered"]
