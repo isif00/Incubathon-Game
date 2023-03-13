@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Start Menu .mp3-234956898ade2d24251d19d0f648bc7b.mp3str"
+
+[deps]
+
+source_file="res://Assets/Audio/Levels_Bg_Muic/Start Menu .mp3"
+dest_files=[ "res://.import/Start Menu .mp3-234956898ade2d24251d19d0f648bc7b.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

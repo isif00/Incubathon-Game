@@ -9,6 +9,3 @@
 
 ## Note
   this is an open source project, any one can contribute in it .
-
-## Slides link
-   https://www.canva.com/design/DAFcmePODUs/uhSyINe-QoAkIVmwfe2zlA/edit

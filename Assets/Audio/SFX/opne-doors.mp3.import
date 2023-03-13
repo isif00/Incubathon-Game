@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/opne-doors.mp3-bae2f39c1c98202648531f7e06845f3e.mp3str"
+
+[deps]
+
+source_file="res://Assets/Audio/SFX/opne-doors.mp3"
+dest_files=[ "res://.import/opne-doors.mp3-bae2f39c1c98202648531f7e06845f3e.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

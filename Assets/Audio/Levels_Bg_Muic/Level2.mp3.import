@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Level2.mp3-cc39f385bc9e234d8a3184f7a819b2ca.mp3str"
+
+[deps]
+
+source_file="res://Assets/Audio/Levels_Bg_Muic/Level2.mp3"
+dest_files=[ "res://.import/Level2.mp3-cc39f385bc9e234d8a3184f7a819b2ca.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

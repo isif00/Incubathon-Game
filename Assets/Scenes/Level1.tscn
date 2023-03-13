@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=2]
+[gd_scene load_steps=71 format=2]
 
 [ext_resource path="res://Assets/microFantasy.v0.4/tilesets/platformer.png" type="Texture" id=1]
 [ext_resource path="res://Assets/microFantasy.v0.4/items/key_gold.png" type="Texture" id=2]
@@ -575,6 +575,69 @@ extents = Vector2( 7, 7 )
 [sub_resource type="RectangleShape2D" id=55]
 extents = Vector2( 2, 2.5 )
 
+[sub_resource type="CapsuleShape2D" id=56]
+radius = 2.0
+height = 2.0
+
+[sub_resource type="Animation" id=57]
+resource_name = "Idle"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:vframes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"update": 1,
+"values": [  ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4 ]
+}
+
+[sub_resource type="Animation" id=58]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:vframes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[sub_resource type="CapsuleShape2D" id=59]
+radius = 2.0
+height = 2.0
+
 [node name="LEVEL1" type="Node2D"]
 
 [node name="Background" type="Node" parent="."]
@@ -900,6 +963,7 @@ stream = ExtResource( 12 )
 autoplay = true
 
 [node name="2nd_Type_Enemie" type="KinematicBody2D" parent="."]
+z_index = 2
 script = ExtResource( 18 )
 
 [node name="Sprite" type="Sprite" parent="2nd_Type_Enemie"]
@@ -910,8 +974,22 @@ texture = ExtResource( 19 )
 hframes = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="2nd_Type_Enemie"]
+position = Vector2( -16, -18 )
+rotation = -1.5708
+z_index = 2
+shape = SubResource( 56 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="2nd_Type_Enemie"]
+anims/Idle = SubResource( 57 )
+anims/RESET = SubResource( 58 )
+
+[node name="Hit_Box" type="Area2D" parent="2nd_Type_Enemie"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="2nd_Type_Enemie/Hit_Box"]
+modulate = Color( 0.576471, 0.0901961, 0.52549, 1 )
+position = Vector2( -16, -18 )
+rotation = -1.5708
+shape = SubResource( 59 )
 
 [connection signal="area_entered" from="Player/SwordHit" to="Enemy" method="_on_SwordHit_area_entered"]
 [connection signal="timeout" from="Player/Timer" to="Player" method="_on_Timer_timeout"]
@@ -932,3 +1010,5 @@ hframes = 5
 [connection signal="timeout" from="Door/Timer" to="Door" method="_on_Timer_timeout"]
 [connection signal="door_opened" from="Key" to="Door" method="_on_Key_door_opened"]
 [connection signal="body_entered" from="Key/Area2D" to="Key" method="_on_Area2D_body_entered"]
+[connection signal="area_entered" from="2nd_Type_Enemie/Hit_Box" to="Player" method="_on_Hit_Box_area_entered"]
+[connection signal="area_entered" from="2nd_Type_Enemie/Hit_Box" to="2nd_Type_Enemie" method="_on_Hit_Box_area_entered"]

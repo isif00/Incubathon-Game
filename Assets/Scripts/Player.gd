@@ -50,7 +50,7 @@ func get_input():
 	
 	
 	if jump_pressed and is_on_floor():
-		velocity.y = jump_speed *2 # multiplied by 2 just to be able to jump higher
+		velocity.y = jump_speed * 1.8 # multiplied by 2 just to be able to jump higher
 		jumping= true
 
 func _on_ladder_body_entered(body): # body ==> kinematicBody2D + tileMap
@@ -65,7 +65,7 @@ func _on_Timer_timeout():
 	$Sprite.visible = true  
 	$hurt.visible =  false
 
-func _on_HitBox_area_entered(area):
+func _on_HitBox_area_entered(area):  ## This signal is from the enemy 
 	var Health_1 = get_parent().get_node("Hearts/HeartFull")
 	var Health_2 = get_parent().get_node("Hearts/HeartFull2")
 	var Health_3 = get_parent().get_node("Hearts/HeartFull3")
@@ -173,6 +173,40 @@ func _physics_process(delta):
 				velocity.x = -20
 						
 	velocity = move_and_slide(velocity, Vector2(0, -1))
+
+
+
+
+
+func _on_Hit_Box_area_entered(area): ## from enemy 2
+	var Health_1 = get_parent().get_node("Hearts/HeartFull")
+	var Health_2 = get_parent().get_node("Hearts/HeartFull2")
+	var Health_3 = get_parent().get_node("Hearts/HeartFull3")
+	
+	if area.is_in_group("Sword_Hit"):
+		$enemy_killed.play()
+		score += 1
+		
+	if area.is_in_group("HitBox_PLayer"):
+		health -= 1
+		$player_get_hurt.play()	
+		
+		Health_1.visible = false
+		
+		if health == 1:
+			Health_2.visible = false
+			
+		if health == 0:
+			Health_3.visible = false
+			
+		$Sprite.visible = false 
+		$hurt.visible = true 
+		$Timer.start()
+		
+		if health <= 0:
+			death = true
+			$Timer.start()
+			get_tree().change_scene("res://Assets/Scenes/Level1.tscn")
 
 
 
