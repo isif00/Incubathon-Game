@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=2]
+[gd_scene load_steps=71 format=2]
 
 [ext_resource path="res://Assets/microFantasy.v0.4/tilesets/platformer.png" type="Texture" id=1]
 [ext_resource path="res://Assets/microFantasy.v0.4/items/key_gold.png" type="Texture" id=2]
@@ -10,6 +10,15 @@
 [ext_resource path="res://Assets/Ninja_hurt.png" type="Texture" id=8]
 [ext_resource path="res://Assets/Scripts/Door2.gd" type="Script" id=9]
 [ext_resource path="res://Assets/Pixel Heart Sprite Sheet 32x32.png" type="Texture" id=10]
+[ext_resource path="res://Audio/Levels_Bg_Muic/Level2.mp3" type="AudioStream" id=11]
+[ext_resource path="res://Audio/SFX/ough-HURT1.mp3" type="AudioStream" id=12]
+[ext_resource path="res://Audio/SFX/jump.mp3" type="AudioStream" id=13]
+[ext_resource path="res://Audio/SFX/enemy-killed.mp3" type="AudioStream" id=14]
+[ext_resource path="res://Audio/SFX/melee_attack1.mp3" type="AudioStream" id=15]
+[ext_resource path="res://Audio/SFX/opne-doors.mp3" type="AudioStream" id=16]
+[ext_resource path="res://Audio/SFX/key_pickup.wav" type="AudioStream" id=17]
+[ext_resource path="res://Assets/Scripts/2nd_Type_Enemie.gd" type="Script" id=18]
+[ext_resource path="res://Assets/2nd_type_Enemie/Bat.png" type="Texture" id=19]
 
 [sub_resource type="ConvexPolygonShape2D" id=5]
 points = PoolVector2Array( 0, 0, 8, 0, 8, 8, 0, 8 )
@@ -275,10 +284,10 @@ points = PoolVector2Array( 0, 0, 25, 0, 25, 4, 0, 4 )
 5/shapes = [  ]
 5/z_index = 0
 
-[sub_resource type="RectangleShape2D" id=10]
+[sub_resource type="RectangleShape2D" id=51]
 extents = Vector2( 1.66667, 1.92688 )
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=52]
 resource_name = "Idle"
 length = 0.55
 loop = true
@@ -295,7 +304,7 @@ tracks/0/keys = {
 "values": [ 1, 2, 3, 4, 5, 6, 7, 8 ]
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=53]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -334,7 +343,7 @@ tracks/2/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=54]
 resource_name = "Run"
 length = 0.55
 loop = true
@@ -351,7 +360,7 @@ tracks/0/keys = {
 "values": [ 10, 11, 12, 13, 15, 16 ]
 }
 
-[sub_resource type="Animation" id=17]
+[sub_resource type="Animation" id=55]
 resource_name = "death"
 length = 1.1
 step = 0.001
@@ -368,7 +377,7 @@ tracks/0/keys = {
 "values": [ 73, 74, 76, 75, 77, 78 ]
 }
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=56]
 resource_name = "hit"
 length = 0.35
 loop = true
@@ -397,7 +406,7 @@ tracks/1/keys = {
 "values": [ true, false, false, true ]
 }
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=57]
 resource_name = "hit2"
 length = 2.5
 loop = true
@@ -414,7 +423,7 @@ tracks/0/keys = {
 "values": [ 64, 65, 66, 67, 68, 69 ]
 }
 
-[sub_resource type="Animation" id=16]
+[sub_resource type="Animation" id=58]
 resource_name = "jumping"
 length = 0.9
 tracks/0/type = "value"
@@ -479,7 +488,7 @@ switch_mode = 2
 [sub_resource type="AnimationNodeStateMachineTransition" id=48]
 switch_mode = 2
 
-[sub_resource type="AnimationNodeStateMachine" id=27]
+[sub_resource type="AnimationNodeStateMachine" id=59]
 states/Idle/node = SubResource( 18 )
 states/Idle/position = Vector2( 184, 22 )
 states/Run/node = SubResource( 19 )
@@ -493,27 +502,30 @@ states/jumping/position = Vector2( 840, 275 )
 transitions = [ "Idle", "Run", SubResource( 21 ), "Run", "Idle", SubResource( 22 ), "Idle", "jumping", SubResource( 23 ), "jumping", "Idle", SubResource( 24 ), "jumping", "Run", SubResource( 25 ), "Run", "jumping", SubResource( 26 ), "Idle", "hit", SubResource( 35 ), "hit", "Idle", SubResource( 36 ), "Run", "hit", SubResource( 37 ), "hit", "death", SubResource( 43 ), "Idle", "death", SubResource( 44 ), "jumping", "death", SubResource( 45 ), "Run", "death", SubResource( 46 ), "jumping", "hit", SubResource( 47 ), "hit", "jumping", SubResource( 48 ) ]
 start_node = "Idle"
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=28]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=60]
 
-[sub_resource type="RectangleShape2D" id=38]
+[sub_resource type="RectangleShape2D" id=61]
 extents = Vector2( 1.94444, 0.694444 )
 
-[sub_resource type="RectangleShape2D" id=41]
+[sub_resource type="RectangleShape2D" id=62]
 extents = Vector2( 1.66667, 2.22222 )
 
-[sub_resource type="RectangleShape2D" id=39]
+[sub_resource type="RectangleShape2D" id=66]
 extents = Vector2( 0.75, 1 )
 
-[sub_resource type="RectangleShape2D" id=40]
+[sub_resource type="RectangleShape2D" id=67]
 extents = Vector2( 1.25, 1.25 )
 
 [sub_resource type="RectangleShape2D" id=32]
 extents = Vector2( 0.25, 16.125 )
 
-[sub_resource type="RectangleShape2D" id=49]
+[sub_resource type="RectangleShape2D" id=63]
+extents = Vector2( 2, 2.5 )
+
+[sub_resource type="RectangleShape2D" id=64]
 extents = Vector2( 7, 7 )
 
-[sub_resource type="TileSet" id=2]
+[sub_resource type="TileSet" id=65]
 0/name = "platformer.png 0"
 0/texture = ExtResource( 1 )
 0/tex_offset = Vector2( 0, 0 )
@@ -557,8 +569,123 @@ extents = Vector2( 7, 7 )
 2/shapes = [  ]
 2/z_index = 0
 
-[sub_resource type="RectangleShape2D" id=50]
-extents = Vector2( 2, 2.5 )
+[sub_resource type="CapsuleShape2D" id=68]
+radius = 2.0
+height = 2.0
+
+[sub_resource type="Animation" id=69]
+resource_name = "Idle"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:vframes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"update": 1,
+"values": [  ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4 ]
+}
+
+[sub_resource type="Animation" id=70]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:vframes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[sub_resource type="CapsuleShape2D" id=71]
+radius = 2.0
+height = 2.0
+
+[sub_resource type="Animation" id=72]
+resource_name = "Idle"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:vframes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"update": 1,
+"values": [  ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4 ]
+}
+
+[sub_resource type="Animation" id=73]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:vframes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
 
 [node name="LEVEL1" type="Node2D"]
 
@@ -580,20 +707,20 @@ tile_data = PoolIntArray( -196614, 1, 0, -65541, 3, 0, -5, 0, 0, -4, 2, 0, 65532
 current = true
 zoom = Vector2( 0.1, 0.1 )
 
-[node name="Player" type="KinematicBody2D" parent="." groups=["Climber"]]
+[node name="Player2" type="KinematicBody2D" parent="." groups=["Climber"]]
 scale = Vector2( 1.8, 1.8 )
 z_index = 3
 script = ExtResource( 5 )
 jump_speed = -35
 gravity = 70
 
-[node name="hurt" type="Sprite" parent="Player"]
+[node name="hurt" type="Sprite" parent="Player2"]
 position = Vector2( -4.44444, -3.33333 )
 scale = Vector2( 0.18, 0.141 )
 z_index = 1
 texture = ExtResource( 8 )
 
-[node name="Sprite" type="Sprite" parent="Player"]
+[node name="Sprite" type="Sprite" parent="Player2"]
 position = Vector2( -4.8514, -5.20043 )
 rotation = -0.00174533
 scale = Vector2( 0.180483, 0.141 )
@@ -602,41 +729,59 @@ hframes = 9
 vframes = 9
 frame = 20
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player2"]
 position = Vector2( -5, -3.88889 )
-shape = SubResource( 10 )
+shape = SubResource( 51 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
-anims/Idle = SubResource( 11 )
-anims/RESET = SubResource( 12 )
-anims/Run = SubResource( 13 )
-anims/death = SubResource( 17 )
-anims/hit = SubResource( 14 )
-anims/hit2 = SubResource( 15 )
-anims/jumping = SubResource( 16 )
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Player2"]
+anims/Idle = SubResource( 52 )
+anims/RESET = SubResource( 53 )
+anims/Run = SubResource( 54 )
+anims/death = SubResource( 55 )
+anims/hit = SubResource( 56 )
+anims/hit2 = SubResource( 57 )
+anims/jumping = SubResource( 58 )
 
-[node name="AnimationTree" type="AnimationTree" parent="Player"]
-tree_root = SubResource( 27 )
+[node name="AnimationTree" type="AnimationTree" parent="Player2"]
+tree_root = SubResource( 59 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
-parameters/playback = SubResource( 28 )
+parameters/playback = SubResource( 60 )
 
-[node name="SwordHit" type="Area2D" parent="Player" groups=["Sword_Hit"]]
+[node name="SwordHit" type="Area2D" parent="Player2" groups=["Sword_Hit"]]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/SwordHit"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player2/SwordHit"]
 position = Vector2( -1.944, -3.194 )
-shape = SubResource( 38 )
+shape = SubResource( 61 )
 disabled = true
 
-[node name="HitBox_Player" type="Area2D" parent="Player" groups=["HitBox_PLayer"]]
+[node name="HitBox_Player" type="Area2D" parent="Player2" groups=["HitBox_PLayer"]]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/HitBox_Player"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player2/HitBox_Player"]
 modulate = Color( 0.839216, 0, 0.768627, 1 )
 position = Vector2( -5, -3.88889 )
-shape = SubResource( 41 )
+shape = SubResource( 62 )
 
-[node name="Timer" type="Timer" parent="Player"]
+[node name="Timer" type="Timer" parent="Player2"]
 wait_time = 0.2
+
+[node name="jump_SFX" type="AudioStreamPlayer" parent="Player2"]
+stream = ExtResource( 13 )
+volume_db = -8.758
+
+[node name="player_get_hurt" type="AudioStreamPlayer" parent="Player2"]
+stream = ExtResource( 12 )
+volume_db = -8.758
+
+[node name="melee_attack" type="AudioStreamPlayer" parent="Player2"]
+stream = ExtResource( 15 )
+volume_db = -8.758
+pitch_scale = 1.36
+
+[node name="enemy_killed" type="AudioStreamPlayer" parent="Player2"]
+stream = ExtResource( 14 )
+volume_db = -8.758
+pitch_scale = 1.36
 
 [node name="Enemy" type="KinematicBody2D" parent="." groups=["Enemy"]]
 position = Vector2( -39, -14 )
@@ -648,7 +793,7 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy"]
 position = Vector2( 11, 22 )
-shape = SubResource( 39 )
+shape = SubResource( 66 )
 
 [node name="PotionGreen" type="Sprite" parent="Enemy"]
 position = Vector2( 11, 22 )
@@ -660,55 +805,13 @@ texture = ExtResource( 3 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy/HitBox"]
 modulate = Color( 0.207843, 0.596078, 0.0509804, 1 )
 position = Vector2( 11, 22 )
-shape = SubResource( 40 )
+shape = SubResource( 67 )
 
 [node name="lader" type="Area2D" parent="."]
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="lader"]
 position = Vector2( -27.75, 9.125 )
 shape = SubResource( 32 )
-
-[node name="Door" type="StaticBody2D" parent="."]
-script = ExtResource( 9 )
-
-[node name="Door" type="Area2D" parent="Door"]
-
-[node name="DoorCollider" type="CollisionShape2D" parent="Door/Door"]
-position = Vector2( 23, -6 )
-shape = SubResource( 49 )
-
-[node name="Door_close" type="TileMap" parent="Door"]
-z_index = 1
-tile_set = SubResource( 2 )
-cell_size = Vector2( 15, 13 )
-cell_custom_transform = Transform2D( 10, 0, 0, 10, 0, 0 )
-format = 1
-tile_data = PoolIntArray( -131070, 1, 0, -65535, 0, 0 )
-
-[node name="Door_open" type="TileMap" parent="Door"]
-tile_set = SubResource( 2 )
-cell_size = Vector2( 15, 13 )
-cell_custom_transform = Transform2D( 10, 0, 0, 10, 0, 0 )
-format = 1
-tile_data = PoolIntArray( -131070, 1, 0, -65535, 2, 0, 1, 1, 0 )
-
-[node name="Key" type="StaticBody2D" parent="."]
-position = Vector2( 28, -2 )
-script = ExtResource( 6 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="KeyGold" type="Sprite" parent="Key"]
-position = Vector2( -27.75, -10.5 )
-scale = Vector2( 0.5, 0.416667 )
-texture = ExtResource( 2 )
-
-[node name="Area2D" type="Area2D" parent="Key"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Key/Area2D"]
-position = Vector2( -28, -11 )
-shape = SubResource( 50 )
 
 [node name="Hearts" type="Node2D" parent="."]
 position = Vector2( 44, -25 )
@@ -769,14 +872,133 @@ margin_bottom = 63.0
 tab_size = 9
 text = "0"
 
-[connection signal="area_entered" from="Player/SwordHit" to="Enemy" method="_on_SwordHit_area_entered"]
-[connection signal="timeout" from="Player/Timer" to="Player" method="_on_Timer_timeout"]
-[connection signal="area_entered" from="Enemy/HitBox" to="Player" method="_on_HitBox_area_entered"]
-[connection signal="body_entered" from="lader" to="Player" method="_on_ladder_body_entered"]
-[connection signal="body_entered" from="lader" to="Enemy" method="_on_lader_body_entered"]
-[connection signal="body_exited" from="lader" to="Player" method="_on_ladder_body_exited"]
-[connection signal="body_exited" from="lader" to="Enemy" method="_on_lader_body_exited"]
-[connection signal="body_entered" from="Door/Door" to="Key" method="_on_Door_body_entered"]
-[connection signal="body_exited" from="Door/Door" to="Key" method="_on_Door_body_exited"]
-[connection signal="door_opened" from="Key" to="Door" method="_on_Key_door_opened"]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
+autoplay = true
+
+[node name="Key" type="StaticBody2D" parent="."]
+position = Vector2( 28, -2 )
+z_index = 10
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="KeyGold" type="Sprite" parent="Key"]
+position = Vector2( -27.75, -10.5 )
+scale = Vector2( 0.5, 0.416667 )
+texture = ExtResource( 2 )
+
+[node name="Area2D" type="Area2D" parent="Key"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Key/Area2D"]
+position = Vector2( -28, -11 )
+shape = SubResource( 63 )
+
+[node name="key_collected" type="AudioStreamPlayer" parent="Key"]
+stream = ExtResource( 17 )
+volume_db = -8.758
+pitch_scale = 1.2
+
+[node name="Door" type="StaticBody2D" parent="."]
+script = ExtResource( 9 )
+
+[node name="Door" type="Area2D" parent="Door"]
+
+[node name="DoorCollider" type="CollisionShape2D" parent="Door/Door"]
+position = Vector2( 23, -6 )
+shape = SubResource( 64 )
+
+[node name="Door_close" type="TileMap" parent="Door"]
+z_index = 1
+tile_set = SubResource( 65 )
+cell_size = Vector2( 15, 13 )
+cell_custom_transform = Transform2D( 10, 0, 0, 10, 0, 0 )
+format = 1
+tile_data = PoolIntArray( -131070, 1, 0, -65535, 0, 0 )
+
+[node name="Door_open" type="TileMap" parent="Door"]
+tile_set = SubResource( 65 )
+cell_size = Vector2( 15, 13 )
+cell_custom_transform = Transform2D( 10, 0, 0, 10, 0, 0 )
+format = 1
+tile_data = PoolIntArray( -131070, 1, 0, -65535, 2, 0, 1, 1, 0 )
+
+[node name="Timer" type="Timer" parent="Door"]
+wait_time = 0.337
+
+[node name="door_open_SFX" type="AudioStreamPlayer" parent="Door"]
+stream = ExtResource( 16 )
+volume_db = -2.0
+
+[node name="2nd_Type_Enemie" type="KinematicBody2D" parent="."]
+position = Vector2( -16, 0 )
+z_index = 2
+script = ExtResource( 18 )
+
+[node name="Sprite" type="Sprite" parent="2nd_Type_Enemie"]
+position = Vector2( -16.5, -16.25 )
+scale = Vector2( 0.4375, 0.4375 )
+z_index = 2
+texture = ExtResource( 19 )
+hframes = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="2nd_Type_Enemie"]
+position = Vector2( -16, -18 )
+rotation = -1.5708
+z_index = 2
+shape = SubResource( 68 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="2nd_Type_Enemie"]
+anims/Idle = SubResource( 69 )
+anims/RESET = SubResource( 70 )
+
+[node name="Hit_Box" type="Area2D" parent="2nd_Type_Enemie"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="2nd_Type_Enemie/Hit_Box"]
+modulate = Color( 0.576471, 0.0901961, 0.52549, 1 )
+position = Vector2( -16, -18 )
+rotation = -1.5708
+shape = SubResource( 71 )
+
+[node name="2nd_Type_Enemie2" type="KinematicBody2D" parent="."]
+position = Vector2( 16, 5 )
+scale = Vector2( -1, 1 )
+z_index = 2
+script = ExtResource( 18 )
+
+[node name="Sprite" type="Sprite" parent="2nd_Type_Enemie2"]
+position = Vector2( -16.5, -16.25 )
+scale = Vector2( 0.4375, 0.4375 )
+z_index = 2
+texture = ExtResource( 19 )
+hframes = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="2nd_Type_Enemie2"]
+position = Vector2( -16, -18 )
+rotation = -1.5708
+z_index = 2
+shape = SubResource( 68 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="2nd_Type_Enemie2"]
+anims/Idle = SubResource( 72 )
+anims/RESET = SubResource( 73 )
+
+[node name="Hit_Box" type="Area2D" parent="2nd_Type_Enemie2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="2nd_Type_Enemie2/Hit_Box"]
+modulate = Color( 0.576471, 0.0901961, 0.52549, 1 )
+position = Vector2( -16, -18 )
+rotation = -1.5708
+shape = SubResource( 71 )
+
+[connection signal="timeout" from="Player2/Timer" to="Player2" method="_on_Timer_timeout"]
+[connection signal="area_entered" from="Enemy/HitBox" to="Player2" method="_on_HitBox_area_entered"]
+[connection signal="area_entered" from="Enemy/HitBox" to="Enemy" method="_on_HitBox_area_entered"]
+[connection signal="area_entered" from="lader" to="Player2" method="_on_lader_area_entered"]
 [connection signal="body_entered" from="Key/Area2D" to="Key" method="_on_Area2D_body_entered"]
+[connection signal="timeout" from="Door/Timer" to="Door" method="_on_Timer_timeout"]
+[connection signal="area_entered" from="2nd_Type_Enemie/Hit_Box" to="Player2" method="_on_Hit_Box_area_entered"]
+[connection signal="area_entered" from="2nd_Type_Enemie/Hit_Box" to="2nd_Type_Enemie" method="_on_Hit_Box_area_entered"]
+[connection signal="area_entered" from="2nd_Type_Enemie2/Hit_Box" to="Player2" method="_on_Hit_Box_area_entered"]
+[connection signal="area_entered" from="2nd_Type_Enemie2/Hit_Box" to="2nd_Type_Enemie2" method="_on_Hit_Box_area_entered"]

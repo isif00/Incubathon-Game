@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/enemy-killed.mp3-1892e52a9e961cb22c2e63eac2c8e2b2.mp3str"
+
+[deps]
+
+source_file="res://Assets/Audio/SFX/enemy-killed.mp3"
+dest_files=[ "res://.import/enemy-killed.mp3-1892e52a9e961cb22c2e63eac2c8e2b2.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

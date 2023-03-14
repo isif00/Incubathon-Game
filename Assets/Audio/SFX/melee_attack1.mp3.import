@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/melee_attack1.mp3-bcfbc0457bd9725fa4ee4498934f5a7b.mp3str"
+
+[deps]
+
+source_file="res://Assets/Audio/SFX/melee_attack1.mp3"
+dest_files=[ "res://.import/melee_attack1.mp3-bcfbc0457bd9725fa4ee4498934f5a7b.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/key-get.mp3-44bd30044278fc8dc2e0d0fc703dd58f.mp3str"
+
+[deps]
+
+source_file="res://Audio/SFX/key-get.mp3"
+dest_files=[ "res://.import/key-get.mp3-44bd30044278fc8dc2e0d0fc703dd58f.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
