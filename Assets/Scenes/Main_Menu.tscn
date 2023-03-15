@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Assets/Scripts/Main_Menu.gd" type="Script" id=1]
 [ext_resource path="res://Assets/microFantasy.v0.4/tilesets/platformer.png" type="Texture" id=2]
+[ext_resource path="res://Audio/Levels_Bg_Muic/Start_Menu2.mp3" type="AudioStream" id=3]
 
 [sub_resource type="ConvexPolygonShape2D" id=5]
 points = PoolVector2Array( 0, 0, 8, 0, 8, 8, 0, 8 )
@@ -327,6 +328,10 @@ margin_top = 48.0
 margin_right = 348.0
 margin_bottom = 68.0
 text = "QUIT"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+autoplay = true
 
 [connection signal="pressed" from="VBoxContainer/Play" to="." method="_on_Play_pressed"]
 [connection signal="pressed" from="VBoxContainer/QUIT" to="." method="_on_QUIT_pressed"]

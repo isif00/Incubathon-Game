@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/ough-HURT1.mp3-a16c0635f85c26892675b79190d12506.mp3str"
+
+[deps]
+
+source_file="res://Assets/Audio/SFX/ough-HURT1.mp3"
+dest_files=[ "res://.import/ough-HURT1.mp3-a16c0635f85c26892675b79190d12506.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
